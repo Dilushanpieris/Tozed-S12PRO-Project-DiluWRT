@@ -189,3 +189,310 @@ wget -O /tmp/modem_service_01.sh --no-check-certificate --header="Authorization:
 >Reboot To Test The Service Function After CLI Test NCM Modem Will Now Be Attached to Usb0 in every reboot.
 
 <hr>
+
+### Signal Indicator light Configs
+>[!IMPORTANT]
+>This Section Scripts Are Meant to Control LEDs With Custom Scripts That Respond To AT Commands Using sms_tool Library Before Procceding Further Make Sure that sms_tool Is Fully Functional By Using Test Commands
+
+**Single Command Install**
+
+>[!WARNING]
+>To Run Below Command The Git hub Key Must Be Installed into Router First. it Will Create Modem Watchdog Service.
+
+```
+wget -O /tmp/modem_service_02.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-led-controls.sh" && chmod +x /tmp/modem_service_02.sh && sh /tmp/modem_service_02.sh && rm -f /tmp/modem_service_02.sh
+```
+
+>[!NOTE]
+>Now Your Router Has All Functional lights And Signal indicators. Test by Using SIM Card That Have Signifficant Signal Strength. And Vary the Place If Necessary.
+
+![Preview Router](https://live.staticflickr.com/65535/54784186628_3fae71c3b7.jpg")
+
+## Step 06 Modem Management Interface - 3ginfo-lite/AT Commands/ModemBand
+>[!TIP]
+>To Install 3ginfo Lite Package you Must First Add Custom Feeds From [4IceG Custom Feeds](https://github.com/4IceG/Modem-extras) Here I Have Forked All The Codes Needed to Fully Setup 3gInfo-Lite Package. 
+
+**Install Custom Feeds**
+```
+grep -q IceG_repo /etc/opkg/customfeeds.conf || echo 'src/gz IceG_repo https://github.com/4IceG/Modem-extras/raw/main/myrepo' >> /etc/opkg/customfeeds.conf
+wget https://github.com/4IceG/Modem-extras/raw/main/myrepo/IceG-repo.pub -O /tmp/IceG-repo.pub
+opkg-key add /tmp/IceG-repo.pub
+opkg update
+```
+
+### 3ginfo-Lite Luci App
+
+**Now You Can install Official 3ginfo-Lite Package From [4IceG](https://github.com/4IceG/luci-app-3ginfo-lite?tab=readme-ov-file) Use These Commands**
+
+```
+opkg install luci-app-3ginfo-lite
+```
+>[!IMPORTANT]
+>This Script From 4IceG Does not Work Staright Away. As it Lack Support For Modem LT72-A Now We Will Replace it With Out Own Script to Make It Work. You Can Test it on Luci > Modem >3G/4G Connection
+
+**One Command update Require Key Form Git**
+```
+wget -O /tmp/3ginfo-update.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/update3ginfo-lite.sh" && chmod +x /tmp/3ginfo-update.sh && sh /tmp/3ginfo-update.sh && rm -f /tmp/3ginfo-update.sh
+```
+
+>[!TIP]
+>Now Perfom Reboot For Optional Stability And Test Luci For Signal Indicator Page Configuration Page Also included.
+
+**View of 3gInfo-Lite Package**
+
+![3ginfo-lite](https://live.staticflickr.com/65535/54785920988_8793134957_b.jpg)
+
+### AT Commands Section - for Debugging/Testing 
+```
+opkg update
+opkg install luci-app-atcommands
+```
+**Now You Can See AT Commands Section In the Modem Section.**
+
+### Band Locking using Modemband Package
+>[!IMPORTANT]
+>This Package Is Not Fully Supported By Default Just like 3ginfo Package So We May Need To Have Custom Configs To Send Band Lock Commands.Update Using Following Command from wget
+
+```
+opkg install luci-app-modemband
+```
+
+
+**One Command Update -Require Auth Key**
+
+```
+wget -O /tmp/remote_update.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/main/Update_Scripts/update-modemband.sh" && chmod +x /tmp/remote_update.sh && sh /tmp/remote_update.sh && rm -f /tmp/remote_update.sh
+```
+
+## Step 07 - Wireless Interface Configuration (WPS/WPA2/PSK)
+>[!CAUTION]
+>As a Default Wireless Interfaces Does Not Have Encryption bound in. Wifi toggle Button Usually Works on Tozed S12 Pro And The WPS Button is Disabled by Default for Security Enforcement. But It Can Be Enabled For Use As Follows. **Only Enable WPS if Necessary**
+
+### Initial Setup - WPS/WIFI AP Security
+
+**Test If The Pacakges Are Fully Installed**
+```
+opkg remove wpad-basic-mbedtls wpad-mini
+opkg install wpad hostapd-utils
+```
+
+>[!IMPORTANT]
+>Make Sure To Configure APs with Encryption And Perform Reboot Then you Can Head Over To Luci > Wireless >Security And then Enable WPS Support For Desired AP. (2.4Ghz) Recommended. 
+
+**WPS Enable 2.4Ghz AP (phy0-ap0)**
+
+![WPS Settings](https://live.staticflickr.com/65535/54786250445_0faf7d228a_c.jpg)
+
+**You Can Configure Encryption Settings Here As Well And Now The WPS Push button Works**
+
+<hr>
+
+### WPS LED SCRIPTS
+>[!WARNING]
+>You Must Enable WPS For Required Interface otherwise Following Scripts Won't Work.Careful When Selecting Interfaces. and Leds.
+
+**One Command Install WPS_LED**
+```
+wget -O /tmp/install-wps-led-service.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/wps-led-install.sh" && chmod +x /tmp/install-wps-led-service.sh && sh /tmp/install-wps-led-service.sh && rm -f /tmp/install-wps-led-service.sh
+```
+
+>[!NOTE]
+>Now When you Press WPS Button The LED Of Your Choice (Power:yellow) Will Light up until The WPS Success or Timeout after 120 Secs. 
+
+## Step 08 - MultiWan Failover Setup
+>[!CAUTION]
+>This Section Is To Configure Multiwan Failover Setup That Handle 2 or More WAN Connections to Router And Switch Between According to Metric Value Assigned. **Keep In mind That Mwan3 Uses old Firewall 3 And it Can Cause Problems With Newer Firewall 04 So Use It At your Risk** For Simple Failover you Can Use Gateway Metrics At Interfaces.
+
+### Initial Installian
+
+**Start By Installing This**
+```
+opkg update
+opkg install luci-app-mwan3
+```
+**Now Head Over to Luci > Network > MultiWan Manager > Add Modem Interface To Interface Section In My Case LTE**
+
+>[!WARNING]
+>Remove All The Interfaces/Members/ Policies Otherwise Internet Won't Work As Expected In Configuring PC 
+
+![MwManager View](https://live.staticflickr.com/65535/54786495806_40c39a3f68_b.jpg)
+
+>[!IMPORTANT]
+>IF You Plan to Use LAN Port 04 (Switch Port: Wan) As A Main Internet Connection From Home Router/ISP Head Over To Network > Devices And Configure Br-Lan And **De-attach Switchport:wan** From the Bridge. Then Create New Interface With with Switchport:wan And Assign WAN Firewall Rule. Make Sure to Add Gateway Metrics In The Interfaces Tab.
+
+**Set Gateway Metrics in Network > Interfaces Tab Lower Gateway Metrics Means High Priority.** <br>
+>HomeWan Metric = 5 | HomeNet Metric = 10 | LTE Metric = 15 Means HomeNet Have More Priority Over LTE.
+
+**Now Attach Interfaces In MultiWAN Manager**
+>[!WARNING]
+>To Correctly Check Weather The Interface Is Up Or Not. Use Google/ Cloufalre DNS To Ping Otherwise Its Not Able to Detect the Interface Is Up or Not.<br>
+**Google 8.8.8.8** <br>
+**Cloudflare 1.1.1.1**
+
+
+### Mwan3 Settings/ Advanced Settings - Interfaces
+**Interfaces-Mwan Manager**
+
+![Mwan Settings-intf](https://live.staticflickr.com/65535/54788384854_8a243b2156_b.jpg)
+
+**Settings to Track Interface status**
+
+![Tracking Params](https://live.staticflickr.com/65535/54788409508_bbae41b7a4.jpg)
+
+>Must Add Tracking To All Wan Interfaces Here I Have Added to HomeWan | HomeNet | LTE
+
+### Mwan3 Settings/ Advanced Settings - Members
+
+**Now Define New Members Of MultiWan**
+
+![Member Configs](https://live.staticflickr.com/65535/54788153281_fe4b060374_b.jpg)
+>[!TIP]
+>Metrics Are only Used In This Setup to Control Simple Failover Rule . It Determines Priority of Members And Weight is not Set Due to This Failover Setup Is Not Designed to Split Traffic between WAN Connections. If You Want To Split Traffic The Weight Calculations Are Follows . (If not Keep it defualt just To Switch)
+<br><br>
+HomeNet | **Metric 10** **Weight 200**<br>
+LTE       | **Metric 15** **Weight 300**<br>
+**Weight is Irrelevent Here only Switches using Metrics Low Metric = High Priority**
+<br><hr>
+HomeNet | **Metric 3** **Weight 200**<br>
+LTE       | **Metric 3** **Weight 300**<br><br>
+**Total Weight = 300+200 = 500**<br>
+HomeNet Traffic = 200/500 = 0.4 (40% of Total Traffic) <br>
+LTE Traffic = 300/500 = 0.6 (60% of Total Traffic)
+
+
+### Mwan3 Settings/ Advanced Settings - Policies
+
+**Now Configure Policy And Attach All The Members We Created**
+
+![Policy Image](https://live.staticflickr.com/65535/54788409498_fbe382c074_b.jpg)
+
+>[!NOTE]
+>One Policy That Have All The Members Is Enough to Switch Between Mambers . if you Plan to Split Traffic you May Require More than one policies.
+
+**Now Attach New Policy into https/default_rule_v4 To Route Traffic Save And Apply**
+
+![Policy Table](https://live.staticflickr.com/65535/54787310492_7c30d8e3c4_b.jpg)
+
+**Now Router Will Switch Between Interfaces According to Metrics And I Have Tested With 3 WAN Connections.**
+
+## Step 09 - Smart Traffic Control QoS/SQM
+>[!TIP]
+>Used For Limit Bandwidth Between WAN And LAN Netwroks to Manage Traffic Upon Uplink Router / LAN Connections To Router. This Section Divided Into <br>
+* WAN SQM(Smart Queue Management) <br>
+* LAN SQM(Smart Queue Management)
+
+**Installing Of QoS/SQM Package**
+```
+opkg update
+opkg install luci-app-sqm
+```
+### WAN SQM/QOS
+>[!WARNING]
+>Changes Done Here Will Affect Bandwidth of All The Router Conncetions (Lan Bridge And Attached Interfaces to Specific LAN) Also you Can Customize With Individual WANs As Well. 
+
+To Setup WAN Bandwidth Limit First Create Interfaces As Per Your Requirement Using Interface Management Tab Luci > Network > Interfaces 
+
+>[!TIP]
+>Now Test Your Speeds Using [SpeedTest](https://Speedtest.net) or [WaveForm](https://www.waveform.com/tools/bufferbloat) and Acquire Test Results in kbp/s For Setting WAN 85-95% of uplink Speed Is Recommended. <br>
+**Ex: Test Results 245,000 Kbp/s Down And 150,000 Kbp/s Up Setup SQM For About 90% As** <br>
+* SQM Downlink 220,500 Kbp/s     
+* SQM Uplink  135,000 Kbp/s
+* Setting 0 Kbp/s means no control Applied 
+
+**Now Head Over To Luci > Network > Qos/SQM Tab and Select Interface Of WAN Then Set Uplink/Downlink**
+
+![Sample Basic Settings](https://live.staticflickr.com/65535/54791182544_e90fae9bb6_b.jpg)
+
+>[!NOTE]
+>If you Need Download of 70Mbp/s And Upload of 50Mbps Put Speeds As above.
+
+**Link Layer Adaptation Tab**
+>[!NOTE]
+>The purpose of Link Layer Adaptation is to give the shaper more knowledge about the actual size of the packets so it can calculate how long packets will take to send. When the upstream ISP technology adds overhead to the packet, we should try to account for it. This primarily makes a big difference for traffic using small packets, like VOIP or gaming traffic. If a packet is only 150 bytes and say 44 bytes are added to it, then the packet is 29% larger than expected and so the shaper will be under-estimating the bandwidth used if it doesn't know about this overhead. 44 byte With Ethernet Overhead is Recommended for MultiWan Setup Like This.
+
+![Smaple Link Layer Adaptaion](https://live.staticflickr.com/65535/54790096222_efc9ec61ec_b.jpg)
+
+### LAN SQM/QOS
+>[!TIP]
+>Here You Can Set Speeds For Each LAN Interface Such As Wifi AP/ Switchports But Keep in Mind Download Link Speed Is Defined in LAN Marked As Upload In SQM Instance So Configure Like This. LAN Interfaces Does Not Require Link layer Adaptation as It Is Managed by Inbuilt WAN.
+
+**Here I Have Added Bandwidth Limit - SQM For 5Ghz AP**
+
+![LAN SQM](https://live.staticflickr.com/65535/54791182534_c8b700b543_b.jpg)
+
+## Step 10 - USB As a Package Storage 
+
+### Hardware Mods.
+>[!IMPORTANT]
+>To Mount USB S12 Pro Does Not Have Inbuilt 5V Supply for USB Port You Can Use AMS1117 5v Regulator Module For Supply Usb Port With +5v Line The Voltage Taps Are Found As Follows. 
+
+**5V Regulator Voltage Taps**
+
+![Regulaotor Taps](https://live.staticflickr.com/65535/54783947631_bc54d0e11e_z.jpg)
+
+
+>[!CAUTION]
+>Never Use Liner Regulator Like LM7805 For This As it Generate Signifficant Heat.And Require Adaquete Cooling And Power. Still Its Not Suitable. Also Never Tap Directly From +12V Line As It Lacks Voltage Stabilizers.
+
+**After Wiring Regulaotor It Will Look Like This**
+
+![Regulator Plugged](https://live.staticflickr.com/65535/54783947511_a269155147_z.jpg)
+
+### USB Setup As Package Storage.(ex_root Config)
+>[!IMPORTANT]
+>Format Your USB Drive To FAT32/ExFAT And Then Plug into Roter Then Install These Packages. 
+
+```
+opkg update
+opkg install block-mount kmod-fs-ext4 e2fsprogs parted kmod-usb-storage
+```
+**For SSD USB Enclosure**
+```
+ opkg install kmod-usb-storage-uas  # Optional Package
+```
+
+**List Out Partitions And See Weather The Device is Functional make Sure Its /sda**
+```
+ls -l /sys/block
+```
+
+**Partition And Format Disk**
+```
+DISK="/dev/sda"
+parted -s ${DISK} -- mklabel gpt mkpart extroot 2048s -2048s
+DEVICE="${DISK}1"
+mkfs.ext4 -L extroot ${DEVICE}
+```
+
+**Configure Exroot Mount Entry**
+```
+eval $(block info ${DEVICE} | grep -o -e 'UUID="\S*"')
+eval $(block info | grep -o -e 'MOUNT="\S*/overlay"')
+uci -q delete fstab.extroot
+uci set fstab.extroot="mount"
+uci set fstab.extroot.uuid="${UUID}"
+uci set fstab.extroot.target="${MOUNT}"
+uci commit fstab
+```
+
+**Configure Mount Entry For Original Overlay**
+```
+ORIG="$(block info | sed -n -e '/MOUNT="\S*\/overlay"/s/:\s.*$//p')"
+uci -q delete fstab.rwm
+uci set fstab.rwm="mount"
+uci set fstab.rwm.device="${ORIG}"
+uci set fstab.rwm.target="/rwm"
+uci commit fstab
+```
+
+**Transfer Data to USB/sda**
+```
+mount ${DEVICE} /mnt
+tar -C ${MOUNT} -cvf - . | tar -C /mnt -xf -
+reboot
+```
+
+>[!NOTE]
+Now It Will Attached To System Storeage And You can See it on Luci Interface. Removing USB Will Not Cause Boot Hang The Router but your New Configs And Packages Are not Accessible After Removing.
+
+![ExRoot USB](https://live.staticflickr.com/65535/54791040771_c398cb014f_c.jpg)
