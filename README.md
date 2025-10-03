@@ -485,6 +485,7 @@ uci set fstab.rwm.target="/rwm"
 uci commit fstab
 ```
 
+### Overlay Transfer
 **Transfer Data to USB/sda**
 ```
 mount ${DEVICE} /mnt
@@ -493,6 +494,248 @@ reboot
 ```
 
 >[!NOTE]
-Now It Will Attached To System Storeage And You can See it on Luci Interface. Removing USB Will Not Cause Boot Hang The Router but your New Configs And Packages Are not Accessible After Removing.
+>Now It Will Attached To System Storeage And You can See it on Luci Interface. Removing USB Will Not Cause Boot Hang The Router but your New Configs And Packages Are not Accessible After Removing USB.
 
 ![ExRoot USB](https://live.staticflickr.com/65535/54791040771_c398cb014f_c.jpg)
+
+## Step 11 V2ray A Client - VPN On OpenWRT
+
+### Passwall 01 AND Passwall 02
+>[!IMPORTANT]
+>Passwall Is Good At Pacakge Handling and Resource Management. **Passwall 01 is Recommended To Use In Router Like S12 Pro To limit Resource Usage (CPU)**<br>
+To Install Passwall You Must First Make Sure to Remove Dnsmasq And Install Full Version of The Package **Ignore Confile Errors**<br>
+However the Max Speeds Can Be Achived **limited by CPU > Around 20-30mbps on Fibre uplink.**
+
+```
+opkg update
+opkg remove dnsmasq
+opkg install dnsmasq-full
+```
+
+**Install Opkg Key**
+```
+wget -O passwall.pub https://master.dl.sourceforge.net/project/openwrt-passwall-build/passwall.pub
+opkg-key add passwall.pub
+
+```
+
+**Add Repo for Passwall**
+```
+read release arch << EOF
+$(. /etc/openwrt_release ; echo ${DISTRIB_RELEASE%.*} $DISTRIB_ARCH)
+EOF
+for feed in passwall_luci passwall_packages passwall2; do
+  echo "src/gz $feed https://master.dl.sourceforge.net/project/openwrt-passwall-build/releases/packages-$release/$arch/$feed" >> /etc/opkg/customfeeds.conf
+done
+
+```
+
+**Download External Feeds**
+```
+wget https://downloads.sourceforge.net/project/v2raya/openwrt/v2raya.pub -O /etc/opkg/keys/94cc2a834fb0aa03
+```
+
+**Add Feeds To WRT (v2ray Feeds)**
+```
+echo "src/gz v2raya https://downloads.sourceforge.net/project/v2raya/openwrt/$(. /etc/openwrt_release && echo "$DISTRIB_ARCH")" | tee -a "/etc/opkg/customfeeds.conf"
+```
+
+**Install Dependecy Package**
+```
+opkg update
+opkg install kmod-nft-tproxy
+opkg install kmod-nft-socket
+opkg install xray-core
+```
+**Now Install Passwall-01 using**
+```
+opkg install luci-app-passwall
+```
+
+**For Install Passwall-02 - optional For Better Performing SoC.**
+```
+opkg install luci-app-passwall2 v2ray-geosite-ir
+```
+**Passwall Interface Will Look Like This**
+
+![Passwall](https://live.staticflickr.com/65535/54793054769_c8e44c519e_c.jpg)
+
+
+>[!IMPORTANT]
+>Now Add your Delays And Configs Then Connect Make Sure To Tick Local Host Bind . Make Sure to Reconnect LAN/WLAN interfaces After Start.<br>To route All Traffic Through Proxy TCP Ports must be Set To **All** In **Other Settings** And in Main Page The Proxy must Set to **Global Proxy.** Otherwise There maybe DNS Leaks.
+
+>[!TIP]
+>If You Want to Skip VPN For Specific Devices Configure Shunt First And Make Priority At RULE LIST Then Create ACL Rule Using Direct Shunt. Add MAC Addresses to Bypass Proxy For Specific Devices
+
+**Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
+
+### V2Ray-A For Better UI/But Poor Resource Management 
+
+**Download Required Package/Key**
+```
+wget https://downloads.sourceforge.net/project/v2raya/openwrt/v2raya.pub -O /etc/opkg/keys/94cc2a834fb0aa03
+```
+
+**Add Feeds To WRT (v2ray Feeds)-If You Have Already Installed Passwall Skip this Step**
+```
+echo "src/gz v2raya https://downloads.sourceforge.net/project/v2raya/openwrt/$(. /etc/openwrt_release && echo "$DISTRIB_ARCH")" | tee -a "/etc/opkg/customfeeds.conf"
+```
+
+**Reload Feeds**
+```
+opkg update
+```
+**Now Install V2rayA-Dependency Package**
+```
+opkg install v2raya
+opkg install kmod-nft-tproxy
+opkg install xray-core
+```
+
+**Luci App Install V2ray-A**
+```
+opkg install luci-app-v2raya
+```
+
+**Reboot For Optional Stability**
+
+![Luci V2rayA](https://live.staticflickr.com/65535/54791457850_0e30b69b6f_b.jpg)
+
+### V2ray A Dashboard
+>[!NOTE]
+>It Is Usally Disabled by Default And you May Enable And Open Web interface its Usually At Routerip:2017 And And From That interface you Can Configure All v2ray (Multisocket) Rules. Make Sure to Create Uname And Pass on First login.
+
+**Now Import Settings like VLESS/VMESS Then Change Settings As Follows**
+
+![V2rayA](https://live.staticflickr.com/65535/54791457750_cb2f3b7d81_b.jpg)
+
+**Settings (Proxy Configs) For V2rayA**
+
+![Proxy V2rayA](https://live.staticflickr.com/65535/54783098227_98c34fd613_z.jpg)
+
+**Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
+
+## Step 12 - Luci Mobile Management Interface/CPU Plugin
+
+>[!TIP]
+>This Is The Cleanest Management UI That You Can Find Just Download From Play Store And Log In Using Router Credentials.
+
+**Play Store Link: [Luci_Mobile](https://play.google.com/store/apps/details?id=com.cogwheel.LuCIMobile&pli=1)**
+
+
+**Luci Mobile View**
+
+![Luci Mobile](https://live.staticflickr.com/65535/54793147630_271f7c810d_c.jpg)
+
+**CPU Plugin Package On Luci Status Page**
+
+**Install using This**
+```
+wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.6.1-r1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.6.1-r1_all.ipk
+opkg install /tmp/luci-app-cpu-status_0.6.1-r1_all.ipk
+rm /tmp/luci-app-cpu-status_0.6.1-r1_all.ipk
+/etc/init.d/rpcd reload
+```
+
+>[!TIP]
+>Now Sign out From Luci And Sign Back In You Can See The CPU Satatus Of Each CPU Core .
+
+## Step 13 Samba4 Server At Shared Storeage  /Overlay.
+>[!CAUTION]
+>To Install Samba4 As Shared Storeage You Must first Have USB Setup As Above and Mount point must be /overlay for Samba We Weill Make Permissions And Create Directory for Optimized Usage. 
+
+```
+ls /overlay
+mkdir /overlay/share
+chmod 777 /overlay/share
+ls -l /overlay/
+
+```
+>[!NOTE]
+>Check for share Directory it must Have All The Permissions (drwxrwxrwx ) to Read Wand Write .Do Not Change Permissions If you Want Read only.
+
+**Install Required Packages**
+```
+opkg update
+opkg install samba4-server
+opkg install luci-app-samba4
+```
+
+**Now Add Name And Path As Follows Path > /overlay/share**
+
+![Samba 4 Add Path/Name](https://live.staticflickr.com/65535/54812433446_fa77937e6a_b.jpg)
+
+
+**Reboot for Configure refresh**
+
+**Add Password Access For Server**
+
+```
+vi /etc/passwd
+```
+**Add This line at The End With Names <newuser> to Replace with Your Own**
+
+```
+newuser:*:1000:65534:newuser:/var:/bin/false
+```
+
+**Add Passsword For New User <Newuser> replace With your username**
+```
+smbpasswd -a newuser
+```
+**Restart Samba4 Service**
+
+```
+service samba restart
+```
+
+**Now Attach Details And path like This**
+
+![Final Settings Samba4](https://live.staticflickr.com/65535/54812433451_74593fe041_b.jpg)
+
+>[!TIP]
+>Now You Can Access Folder Remotely with <br>\\\192.168.2.1\LANUSB (LANUSB can Be Differ)
+<br>
+Then Sign In With your Credentials At Windows/ Linux PC
+
+## Step 14 Statistics Tab /Terminal Install.
+>[!IMPORTANT]
+>This App is Capable Of Monitoring CPU/RAM/Network Interfaces Install it Using Following Commands 
+
+```
+opkg update
+opkg install luci-app-statistics
+opkg install luci-app-ttyd
+```
+
+**View Of Statistics APP**
+
+![Statistics APP](https://live.staticflickr.com/65535/54812776760_b3797d7617_b.jpg)
+
+## Step 15 - Credits/Finalization
+**Interested In Giving Some Creds To Creator :) Run These Commands**
+
+```
+#!/bin/sh
+uci set system.@system[0].hostname='DiluWRT'
+uci commit system
+
+echo "Updating SSH login banner to DiluWRT..."
+cat << EOF > /etc/banner
+8888888b.  d8b 888               888       888 8888888b. 88888888888 
+888  "Y88b Y8P 888               888   o   888 888   Y88b    888     
+888    888     888               888  d8b  888 888    888    888     
+888    888 888 888 888  888      888 d888b 888 888   d88P    888     
+888    888 888 888 888  888      888d88888b888 8888888P"     888     
+888    888 888 888 888  888      88888P Y88888 888 T88b      888     
+888  .d88P 888 888 Y88b 888      8888P   Y8888 888  T88b     888     
+8888888P"  888 888  "Y88888      888P     Y888 888   T88b    888
+                            >NET. Limits Redefined.                                                                                                                                  
+                                          
+EOF
+
+echo "Hostname and SSH banner updated successfully."
+echo "Changes to hostname will take effect after a reboot."
+reboot
+
+```
