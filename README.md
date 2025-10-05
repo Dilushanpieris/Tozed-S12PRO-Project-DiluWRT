@@ -716,6 +716,9 @@ smbpasswd -a newuser
 service samba4 restart
 ```
 
+>[!IMPORTANT]
+>Share Dir Path **/overlay/share**
+
 **Now Attach Details And path like This**
 
 ![Final Settings Samba4](https://live.staticflickr.com/65535/54812433451_74593fe041_b.jpg)
@@ -727,7 +730,7 @@ Then Sign In With your Credentials At Windows/ Linux PC
 
 ## Step 14 Statistics Tab /Terminal Install.
 >[!IMPORTANT]
->This App is Capable Of Monitoring CPU/RAM/Network Interfaces Install it Using Following Commands 
+>This App is Capable Of Monitoring CPU/RAM/Network Interfaces Install it Using Following Commands. Already Installed on My Image
 
 ```
 opkg update
