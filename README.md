@@ -259,7 +259,6 @@ wget -O /tmp/3ginfo-update.sh --no-check-certificate --header="Authorization: to
 
 ### AT Commands Section - for Debugging/Testing 
 ```
-opkg update
 opkg install luci-app-atcommands
 ```
 **Now You Can See AT Commands Section In the Modem Section.**
@@ -306,9 +305,10 @@ opkg install wpad hostapd-utils
 >[!WARNING]
 >You Must Enable WPS For Required Interface otherwise Following Scripts Won't Work.Careful When Selecting Interfaces. and Leds.
 
-**One Command Install WPS_LED**
+**One Command Install WPS_LED Require Auth Key**
 ```
 wget -O /tmp/install-wps-led-service.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/wps-led-install.sh" && chmod +x /tmp/install-wps-led-service.sh && sh /tmp/install-wps-led-service.sh && rm -f /tmp/install-wps-led-service.sh
+reboot
 ```
 
 >[!NOTE]
@@ -685,6 +685,7 @@ ls -l /overlay/
 opkg update
 opkg install samba4-server
 opkg install luci-app-samba4
+reboot
 ```
 
 **Now Add Name And Path As Follows Path > /overlay/share**
@@ -712,7 +713,7 @@ smbpasswd -a newuser
 **Restart Samba4 Service**
 
 ```
-service samba restart
+service samba4 restart
 ```
 
 **Now Attach Details And path like This**
