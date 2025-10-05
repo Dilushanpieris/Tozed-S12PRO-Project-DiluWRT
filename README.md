@@ -521,6 +521,13 @@ reboot
 To Install Passwall You Must First Make Sure to Remove Dnsmasq And Install Full Version of The Package **Ignore Confile Errors**<br>
 However the Max Speeds Can Be Achived **limited by CPU > Around 20-30mbps on Fibre uplink.**
 
+
+**One Command Dependency Install Require Auth Key**
+```
+wget -O /tmp/install-passwall-dep.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall-dep.sh" && chmod +x /tmp/install-passwall-dep.sh && sh /tmp/install-passwall-dep.sh && rm -f /tmp/install-passwall-dep.sh
+```
+
+**Manual Install Skip if You Have Installled using Oneline Command**
 ```
 opkg update
 opkg remove dnsmasq
@@ -562,6 +569,10 @@ opkg install kmod-nft-tproxy
 opkg install kmod-nft-socket
 opkg install xray-core
 ```
+>[!CAUTION]
+>Oneline Dependency Install Runs Auto Intall to this Point And Do Not Use Both Ways To Install Packages. Just Use One Method.
+
+
 **Now Install Passwall-01 using**
 ```
 opkg install luci-app-passwall
@@ -728,7 +739,7 @@ opkg install luci-app-ttyd
 ![Statistics APP](https://live.staticflickr.com/65535/54812776760_b3797d7617_b.jpg)
 
 ## Step 15 - Credits/Finalization
-**Interested In Giving Some Creds To Creator :) Run These Commands**
+**Interested In Giving Some Creds To Creator :) Run These Commands Only For Vanilla Installs.**
 
 ```
 #!/bin/sh
