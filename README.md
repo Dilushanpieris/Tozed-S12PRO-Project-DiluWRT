@@ -147,6 +147,16 @@ wget -O /tmp/argon-remote-install.sh --no-check-certificate --header="Authorizat
 
 ![Theme Argon](https://live.staticflickr.com/65535/54783098247_548dfbcd4b_b.jpg)
 
+### Dashboard Install Oneline Command - Require Auth Key.
+
+```
+wget -O /tmp/install-dashboard.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-dashboard.sh" && chmod +x /tmp/install-dashboard.sh && sh /tmp/install-dashboard.sh && rm -f /tmp/install-dashboard.sh
+```
+
+**Preview Of Dashboard**
+
+![Dashboard Preview](https://live.staticflickr.com/65535/54832039002_7ab91a65fc_b.jpg)
+
 ## Step 05 Configure Signal Lights / Modem Lights / LTE Network Watchdog
 
 ### See If The Drivers Are Installed
@@ -179,10 +189,15 @@ wget -O /tmp/modem_service_01.sh --no-check-certificate --header="Authorization:
 ```
 
 >[!CAUTION]
->To Test The Service Make sure you Have given Correct input to Interface Name otherwise It Will boot loop The Netstack Restart. **Then Run Following Command on CLI to See Weather the Modem Reconnects/Script Exits (Modem-UP).** if The Network Stack Restart more Than 3 Times That means you Have Provided Wrong interface And may require to Run Install Command Again. 
+>To Test The Service Make sure you Have given Correct input to Interface Name otherwise It Will Attach Usb0 to modem And The Script Will Exit (Failsafe Condition) **Then Run Following Command on CLI to See Weather the Modem Reconnects/Script Exits (Modem-UP).** if The Network Stack Restart more Than 3 Times That means you Have Provided Wrong interface And may require to Run Install Command Again. 
 
 ```
 /usr/share/modemstatus/modem-watchdog.sh 
+```
+
+**Test Logs With**
+```
+logread -e 'modem-watchdog'
 ```
 
 >[!NOTE]
@@ -194,7 +209,7 @@ wget -O /tmp/modem_service_01.sh --no-check-certificate --header="Authorization:
 >[!IMPORTANT]
 >This Section Scripts Are Meant to Control LEDs With Custom Scripts That Respond To AT Commands Using sms_tool Library Before Procceding Further Make Sure that sms_tool Is Fully Functional By Using Test Commands
 
-**Single Command Install**
+**Single Command Install Require Auth Key**
 
 >[!WARNING]
 >To Run Below Command The Git hub Key Must Be Installed into Router First. it Will Create Modem Watchdog Service.
