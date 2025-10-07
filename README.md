@@ -588,10 +588,14 @@ opkg install luci-app-passwall2 v2ray-geosite-ir
 
 
 >[!IMPORTANT]
->Now Add your Delays And Configs Then Connect Make Sure To Tick Local Host Bind . Make Sure to Reconnect LAN/WLAN interfaces After Start.<br>To route All Traffic Through Proxy TCP Ports must be Set To **All** In **Other Settings** And in Main Page The Proxy must Set to **Global Proxy.** Otherwise There maybe DNS Leaks.
+>Now Add your Delays And Configs Then Connect. Make Sure to Reconnect LAN/WLAN interfaces After Start.<br>To route All Traffic Through Proxy TCP Ports must be Set To **All** In **Other Settings** And in Main Page The Proxy must Set to **Global Proxy.** Otherwise There maybe DNS Leaks. This Is The Setting For Global Proxy Routing.<br><br>
+**For Exclusion List-->No Proxy** <br>
+1.First Delete **Existing Shunt Rule** From Nodes And Make New Xray Shunt. Then Add New ACL Rule In **Access Control** I And Then Set TCP/UDP Nodes to Xray Shunt.<br>
+2.Now Select Switch to GFW List And Make China Connection As **Direct Coonection** <br>
+3.Now You Can Add Interface Source as **lan** and Exclude Desired MAC Addresses to Proxy.
 
 >[!TIP]
->If You Want to Skip VPN For Specific Devices Configure Shunt First And Make Priority At RULE LIST Then Create ACL Rule Using Direct Shunt. Add MAC Addresses to Bypass Proxy For Specific Devices
+>Just Like Above You Can route Any Device Through Any Node but Require Some CPU Power To Do So.(Change TCP/UDP Node)
 
 **Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
 
