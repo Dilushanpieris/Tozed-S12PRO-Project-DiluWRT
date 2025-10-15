@@ -191,9 +191,6 @@ wget -O /tmp/modem_service_01.sh --no-check-certificate --header="Authorization:
 >[!CAUTION]
 >To Test The Service Make sure you Have given Correct input to Interface Name otherwise It Will Attach Usb0 to modem And The Script Will Exit (Failsafe Condition) **Then Run Following Command on CLI to See Weather the Modem Reconnects/Script Exits (Modem-UP).** if The Network Stack Restart more Than 3 Times That means you Have Provided Wrong interface And may require to Run Install Command Again. 
 
-```
-/usr/share/modemstatus/modem-watchdog.sh 
-```
 
 **Test Logs With**
 ```
