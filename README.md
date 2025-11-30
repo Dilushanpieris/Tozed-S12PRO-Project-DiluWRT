@@ -103,12 +103,12 @@ Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 **Reboot For Better Stability**
 
 # Auto Install without Exroot Config.
->[!TIP]
->This Is The Light Install Method for Those Who only Need DiluWRT Build Without Exroot Configs + Passwall Support. If You Use This It Will Be All Auto Installed Till Step 8. After you Done With Above Steps Just Run this Command To Install To Step 08.
+>[!CAUTION]
+>This Is The Simple Install Method for Those Who only Need DiluWRT Build Without Custom Configs. If You Use This Build Will Be All Auto Installed Till Step 8. Please Make Sure you Have Followed Till Step 03 And Have Working internet To Router Test with **opkg update**
 
 ## One Click Install Command
 ```
-
+wget --no-check-certificate -O /tmp/AutoInstall.sh "https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/refs/heads/main/Firmware%20Build-DiluWRT/AutoInstall.sh" && chmod +x /tmp/AutoInstall.sh && /tmp/AutoInstall.sh
 ```
 # Manual Build - 100% Stable Install
 >[!WARNING]
