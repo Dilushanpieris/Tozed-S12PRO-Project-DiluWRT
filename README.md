@@ -786,3 +786,7 @@ R1BNC: For the extensive video tutorials, guides, and inspiration regarding 4G/5
 The OpenWrt Community: To all the developers, maintainers, and builders who keep this open-source ecosystem alive and thriving.
 
 Project-DiluWRT is built on the shoulders of giants. Thank you!
+
+## Your Support is Much Appriciated:
+
+<p><a href="https://www.buymeacoffee.com/dilu122x"> <img align="center" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="dilu122x" /></a></p><br><br>
