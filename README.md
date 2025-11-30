@@ -59,7 +59,12 @@ Your Configuring port Must Be Connected to Switchport LAN (Any LAN in The Router
 >[!IMPORTANT]
 >**Now Make Sure you Have Working Internet Supplied To Router Via NCM Modem (Sim) or Working Network to update Packages.**
 
-#### This incldues Some Work.. (How To Connect To Existing Wifi)
+#### Easy Way 
+Attach LTE (on Diluwrt > Luci > Interfaces) to WAN Zone And Then Restart LTE. Now You Have Internet through SIM
+
+### Connecting to Existing WIFI Network.
+
+#### This incldues Some Work.. 
 Now Head Over to Luci > Network > Wireless > Scan Form 2.4Ghz Radio > Enable WLAN Radios (Now The WIFI Light Will Light Up On Router. and All the Wireless interfaces Attatch to br-lan) Now Scan From 2,4GHz Radio Connect to Network Using Password.
 
 **Make Sure To Follow this Steps**
