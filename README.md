@@ -79,7 +79,7 @@ Now Your Configuration PC Must Have Internet And Ip Address Assigned With 192.16
 >Reboot Can cause NCM Modem (LTE) to loose Usb Interface Due to Boot up Delays we Will Fix That Later. for Now if You want to re-enable usb0 (LTE Modem) ssh into router and do manual network stack restart using.
 
 ```
-/etc/init.d/network restart  # hard Reset Network Stack
+/etc/init.d/network restart  # hard Reset Network Stack.
 ```
 
 #### Configuring Usb0 (NCM Modem) To Appear As "LTE" insted of wwan - Optional Only For Official Image
@@ -102,6 +102,18 @@ Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 
 **Reboot For Better Stability**
 
+# Auto Install without Exroot Config.
+>[!TIP]
+>This Is The Light Install Method for Those Who only Need DiluWRT Build Without Exroot Configs + Passwall Support. If You Use This It Will Be All Auto Installed Till Step 8. After you Done With Above Steps Just Run this Command To Install To Step 08.
+
+## One Click Install Command
+```
+
+```
+# Manual Build - 100% Stable Install
+>[!WARNING]
+>Follow From Step 03.1 Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt24.01 Sysupgrade Proceed From Step 8 After as you Done Necessary Modifications. **(Optional Features Are At Step 8 And Step 9)**
+
 ## Step 03.1 - SSH Access and Auth Key
 
 >[!NOTE]
@@ -109,7 +121,8 @@ Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 
 **Add My Github Key**
 ```
-This Is Currently Hidden Please Massage Me To Get A Key. +94762358660 on WA.
+GH_TOKEN="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"
+mkdir -p /etc/auth && echo "$GH_TOKEN" > /etc/auth/.github_token && chmod 600 /etc/auth/.github_token
 ```
 
 ## Step 04 - Package Management/Themes
