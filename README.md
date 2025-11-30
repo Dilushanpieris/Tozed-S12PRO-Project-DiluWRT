@@ -111,11 +111,11 @@ Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 
 **Add My Github Key**
 
->[!IMPORTANT]
->Before Requesting Key Fully Read The Guideline From Start to End And Undersatnd The Process. Get Familier. Only The Starting Key Command is Provided to Paste to your SSH Console. 
+>[!CAUTION]
+>Before Requesting Key **Fully Read The Guideline From Start to End And Undersatnd The Process.** Get Familier. Only The Starting Key Command is Provided to Paste to your SSH Console. 
 
 ```
-Please Drop Massage on WA to +94762358660
+Please Drop Massage on WA to +94762358660 To Resquest Key
 ```
 
 # Auto Install without Exroot Config.
@@ -128,8 +128,7 @@ wget --no-check-certificate -O /tmp/AutoInstall.sh "https://raw.githubuserconten
 ```
 # Manual Build - 100% Stable Install
 >[!WARNING]
->Follow From Step 03.1 Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt24.01 Sysupgrade Proceed From Step 8 After as you Done Necessary Modifications. **(Optional Features Are At Step 8 And Step 9)**
-
+>Followed Step 03.1 now You Can Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt24.01 Sysupgrade Proceed From Step 8 After as you Done Necessary Modifications. **(Optional Features Are At Step 8 And Step 9)**
 
 
 ## Step 04 - Package Management/Themes
