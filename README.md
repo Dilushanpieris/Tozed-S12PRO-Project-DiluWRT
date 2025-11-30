@@ -112,10 +112,13 @@ Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 **Add My Github Key**
 
 >[!CAUTION]
->Before Requesting Key **Fully Read The Guideline From Start to End And Undersatnd The Process.** Get Familier. Only The Starting Key Command is Provided to Paste to your SSH Console. 
+>Before Requesting Key : <br>**Fully Read The Guideline From Start to End And Undersatnd The Process.** <br> **Installed DiluDRT Sysupgrade**<br> **Router Have Working Internet Connection**<br>
+Get Familier with The Process. Only The Starting Key Command is Provided to Paste to your SSH Console. 
+
 
 ```
-Please Drop Massage on WA to +94762358660 To Resquest Key
+GH_TOKEN="" 
+mkdir -p /etc/auth && echo "$GH_TOKEN" > /etc/auth/.github_token && chmod 600 /etc/auth/.github_token
 ```
 
 # Auto Install without Exroot Config.
