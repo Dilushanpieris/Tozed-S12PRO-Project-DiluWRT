@@ -6,11 +6,16 @@
 
 echo ""
 echo "-----------------------------------------------------"
-echo " Installing Access Key ....."
+echo " Checking for Access Key ....."
 echo "-----------------------------------------------------"
-GH_TOKEN="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"
-mkdir -p /etc/auth && echo "$GH_TOKEN" > /etc/auth/.github_token && chmod 600 /etc/auth/.github_token
-echo " Access Key Installed."
+
+if [ -f "/etc/auth/.github_token" ]; then
+    echo " Key Found. Proceeding..."
+else
+    echo " Key Is Not Installed."
+    echo " Script Aborted."
+    exit 1
+fi
 
 
 echo ""
@@ -131,6 +136,6 @@ wget -O /tmp/install-wps-led-service.sh --no-check-certificate --header="Authori
 
 echo ""
 echo "-----------------------------------------------------"
-echo " All Tasks Completed Till Step 08. Rebooting System ....."
+echo " All Tasks Completed to Step 08. Rebooting System ....."
 echo "-----------------------------------------------------"
 reboot

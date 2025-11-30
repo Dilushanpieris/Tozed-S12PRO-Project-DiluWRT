@@ -104,6 +104,20 @@ Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 
 **Reboot For Better Stability**
 
+## Step 03.1 - SSH Access and Auth Key
+
+>[!NOTE]
+>Use Software Like Putty To Access Access Router Using SSH Client CLI > ip 192.168.2.1
+
+**Add My Github Key**
+
+>[!IMPORTANT]
+>Before Requesting Key Fully Read The Guideline From Start to End And Undersatnd The Process. Get Familier. Only The Starting Key Command is Provided to Paste to your SSH Console. 
+
+```
+Please Drop Massage on WA to +94762358660
+```
+
 # Auto Install without Exroot Config.
 >[!CAUTION]
 >This Is The Simple Install Method for Those Who only Need DiluWRT Build Without Custom Configs. If You Use This Build Will Be All Auto Installed Till Step 8. Please Make Sure you Have Followed Till Step 03 And Have Working internet To Router Test with **opkg update**
@@ -116,16 +130,7 @@ wget --no-check-certificate -O /tmp/AutoInstall.sh "https://raw.githubuserconten
 >[!WARNING]
 >Follow From Step 03.1 Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt24.01 Sysupgrade Proceed From Step 8 After as you Done Necessary Modifications. **(Optional Features Are At Step 8 And Step 9)**
 
-## Step 03.1 - SSH Access and Auth Key
 
->[!NOTE]
->Use Software Like Putty To Access Access Router Using SSH Client CLI > ip 192.168.2.1
-
-**Add My Github Key**
-```
-GH_TOKEN="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"
-mkdir -p /etc/auth && echo "$GH_TOKEN" > /etc/auth/.github_token && chmod 600 /etc/auth/.github_token
-```
 
 ## Step 04 - Package Management/Themes
 
