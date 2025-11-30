@@ -59,7 +59,8 @@ Your Configuring port Must Be Connected to Switchport LAN (Any LAN in The Router
 >[!IMPORTANT]
 >**Now Make Sure you Have Working Internet Supplied To Router Via NCM Modem (Sim) or Working Network to update Packages.**
 
-#### Easy Way 
+### Easy Way - Existing SIM Connection
+
 Attach LTE (on Diluwrt > Luci > Interfaces) to WAN Zone And Then Restart LTE. Now You Have Internet through SIM
 
 ### Connecting to Existing WIFI Network.
