@@ -789,4 +789,4 @@ Project-DiluWRT is built on the shoulders of giants. Thank you!
 
 ## Your Support is Much Appriciated:
 
-<p><a href="https://www.buymeacoffee.com/dilu122x"> <img align="center" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="dilu122x" /></a></p><br><br>
+<center><p><a href="https://www.buymeacoffee.com/dilu122x"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="dilu122x" /></a></p></center>
