@@ -115,8 +115,11 @@ Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 >Before Requesting Key : <br>**Fully Read The Guideline From Start to End And Undersatnd The Process.** <br> **Installed DiluDRT Sysupgrade**<br> **Router Have Working Internet Connection**<br>
 Get Familier with The Process. Only The Starting Key Command is Provided to Paste to your SSH Console. 
 
-Get Install Key From 
-![WA Contact](https://github.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/blob/main/Utils/WA%20Info.png)
+**Get Install Key From**
+
+![WA Contact](https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/81f479247aad2a663fe45e8c7375e5871c1104f9/Utils/WA_Info.png)
+
+**Key Install Format**
 ```
 GH_TOKEN="" 
 mkdir -p /etc/auth && echo "$GH_TOKEN" > /etc/auth/.github_token && chmod 600 /etc/auth/.github_token
