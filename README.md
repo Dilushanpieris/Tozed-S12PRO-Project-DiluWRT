@@ -9,7 +9,7 @@ Install OpenWRT Using UART (Included In Directory):
 >[!TIP]
 >[openwrt-24.10.2-ramips-mt7621-tozed_zlt-s12-pro-initramfs-kernel](https://downloads.openwrt.org/releases/24.10.2/targets/ramips/mt7621/openwrt-24.10.2-ramips-mt7621-tozed_zlt-s12-pro-initramfs-kernel.bin)
 
-This Only Install WRT to RAM Refer Video on Youtube How To Install Kernal.bin [Video Link R1BNC](https://www.youtube.com/watch?v=yx-Qjkn_afw&t=21s&pp=ygUVT1BFTndydCBUT1pFRCBzMTIgcFJP) 
+This Only Install WRT to RAM Address Refer Video on Youtube How To Install Kernal.bin [Video Link R1BNC](https://www.youtube.com/watch?v=yx-Qjkn_afw&t=21s&pp=ygUVT1BFTndydCBUT1pFRCBzMTIgcFJP) 
 
 **UART Connection**
 
@@ -37,6 +37,8 @@ How To Restore Backup And boot Back into Original Firmware [Video Link R1BNC](ht
 Flash Using Luci Interface > Upgrade/Restore > Flash Firmware / Select File Provided  (Sysupgrade.bin)
 
 >openwrt-24.10.2-015ee654217a-ramips-mt7621-tozed_zlt-s12-pro-squashfs-sysupgrade
+
+**For DiluWRT Flash my Sysupgrade From Releases TAB**
 
 ![First Boot](https://live.staticflickr.com/65535/54784179079_217072a029_b.jpg)
 
@@ -756,30 +758,13 @@ opkg install luci-app-ttyd
 
 ![Statistics APP](https://live.staticflickr.com/65535/54812776760_b3797d7617_b.jpg)
 
-## Step 15 - Credits/Finalization
-**Interested In Giving Some Creds To Creator :) Run These Commands Only For Vanilla Installs.**
+## Acknolwlegements 
 
-```
-#!/bin/sh
-uci set system.@system[0].hostname='DiluWRT'
-uci commit system
+This project would not be possible without the hard work and dedication of the OpenWrt community. A special thank you goes to:
 
-echo "Updating SSH login banner to DiluWRT..."
-cat << EOF > /etc/banner
-8888888b.  d8b 888               888       888 8888888b. 88888888888 
-888  "Y88b Y8P 888               888   o   888 888   Y88b    888     
-888    888     888               888  d8b  888 888    888    888     
-888    888 888 888 888  888      888 d888b 888 888   d88P    888     
-888    888 888 888 888  888      888d88888b888 8888888P"     888     
-888    888 888 888 888  888      88888P Y88888 888 T88b      888     
-888  .d88P 888 888 Y88b 888      8888P   Y8888 888  T88b     888     
-8888888P"  888 888  "Y88888      888P     Y888 888   T88b    888
-                            >NET. Limits Redefined.                                                                                                                                  
-                                          
-EOF
+4IceG: For the incredible work on 3ginfo-lite, luci-app-modemband, and the Modem-extras repository. Your tools are the backbone of the modem monitoring features in this build.
 
-echo "Hostname and SSH banner updated successfully."
-echo "Changes to hostname will take effect after a reboot."
-reboot
+R1BNC: For the extensive video tutorials, guides, and inspiration regarding 4G/5G router modifications and OpenWrt customization.
+The OpenWrt Community: To all the developers, maintainers, and builders who keep this open-source ecosystem alive and thriving.
 
-```
+Project-DiluWRT is built on the shoulders of giants. Thank you!
