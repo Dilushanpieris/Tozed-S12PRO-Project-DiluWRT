@@ -13,7 +13,7 @@ This Only Install WRT to RAM Address Refer Video on Youtube How To Install Kerna
 
 **UART Connection**
 
-![UART Connection](https://live.staticflickr.com/65535/54783098367_3e0a422568.jpg) 
+![UART Connection](https://live.staticflickr.com/65535/54783098367_9b12eecaa6_z.jpg) 
 
 
 ## Step 02 - Backup OEM Firmware
@@ -123,7 +123,7 @@ Get Familier with The Process. Only The Starting Key Command is Provided to Past
 
 **Get Install Key From**
 
-![WA Contact](https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/81f479247aad2a663fe45e8c7375e5871c1104f9/Utils/WA_Info.png)
+![WA Contact](https://live.staticflickr.com/65535/54953867207_c1c615b248.jpg)
 
 **Key Install Format**
 ```
@@ -188,7 +188,7 @@ wget -O /tmp/install-dashboard.sh --no-check-certificate --header="Authorization
 
 **Preview Of Dashboard**
 
-![Dashboard Preview](https://live.staticflickr.com/65535/54832039002_7ab91a65fc_b.jpg)
+![Dashboard Preview](https://live.staticflickr.com/65535/54832039002_53d9e07bf9_b.jpg)
 
 ## Step 05 Configure Signal Lights / Modem Lights / LTE Network Watchdog
 
@@ -251,7 +251,7 @@ wget -O /tmp/modem_service_02.sh --no-check-certificate --header="Authorization:
 >[!NOTE]
 >Now Your Router Has All Functional lights And Signal indicators. Test by Using SIM Card That Have Signifficant Signal Strength. And Vary the Place If Necessary.
 
-![Preview Router](https://live.staticflickr.com/65535/54784186628_3fae71c3b7.jpg")
+![Preview Router](https://live.staticflickr.com/65535/54784186628_995f51e5da_z.jpg)
 
 ## Step 06 Modem Management Interface - 3ginfo-lite/AT Commands/ModemBand
 >[!TIP]
