@@ -487,55 +487,18 @@ To Setup WAN Bandwidth Limit First Create Interfaces As Per Your Requirement Usi
 >[!IMPORTANT]
 >Format Your USB Drive To FAT32/ExFAT And Then Plug into Roter Then Install These Packages. 
 
-```
-opkg update
-opkg install block-mount kmod-fs-ext4 e2fsprogs parted kmod-usb-storage
-```
 **For SSD USB Enclosure**
 ```
  opkg install kmod-usb-storage-uas  # Optional Package
 ```
 
-**List Out Partitions And See Weather The Device is Functional make Sure Its /sda**
-```
-ls -l /sys/block
-```
+**One Command Exroot Config - Key Required**
 
-**Partition And Format Disk**
-```
-DISK="/dev/sda"
-parted -s ${DISK} -- mklabel gpt mkpart extroot 2048s -2048s
-DEVICE="${DISK}1"
-mkfs.ext4 -L extroot ${DEVICE}
-```
+>[!CAUTION]
+>Make Sure You Have Plugged In USB And Have Proper Internet Connection. If There Is Issue With Package Checks Abort Script And Then Try Again 
 
-**Configure Exroot Mount Entry**
 ```
-eval $(block info ${DEVICE} | grep -o -e 'UUID="\S*"')
-eval $(block info | grep -o -e 'MOUNT="\S*/overlay"')
-uci -q delete fstab.extroot
-uci set fstab.extroot="mount"
-uci set fstab.extroot.uuid="${UUID}"
-uci set fstab.extroot.target="${MOUNT}"
-uci commit fstab
-```
-
-**Configure Mount Entry For Original Overlay**
-```
-ORIG="$(block info | sed -n -e '/MOUNT="\S*\/overlay"/s/:\s.*$//p')"
-uci -q delete fstab.rwm
-uci set fstab.rwm="mount"
-uci set fstab.rwm.device="${ORIG}"
-uci set fstab.rwm.target="/rwm"
-uci commit fstab
-```
-
-### Overlay Transfer
-**Transfer Data to USB/sda**
-```
-mount ${DEVICE} /mnt
-tar -C ${MOUNT} -cvf - . | tar -C /mnt -xf -
-reboot
+wget -O /tmp/exroot_config.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/exroot_config.sh" && chmod +x /tmp/exroot_config.sh && sh /tmp/exroot_config.sh && rm -f /tmp/exroot_config.sh
 ```
 
 >[!NOTE]
