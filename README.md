@@ -515,66 +515,11 @@ To Install Passwall You Must First Make Sure to Remove Dnsmasq And Install Full 
 However the Max Speeds Can Be Achived **limited by CPU > Around 20-30mbps on Fibre uplink.**
 
 
-**One Command Dependency Install Require Auth Key**
+**One Command Install Require Auth Key**
 ```
-wget -O /tmp/install-passwall-dep.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall-dep.sh" && chmod +x /tmp/install-passwall-dep.sh && sh /tmp/install-passwall-dep.sh && rm -f /tmp/install-passwall-dep.sh
-```
-
-**Manual Install Skip if You Have Installled using Oneline Command**
-```
-opkg update
-opkg remove dnsmasq
-opkg install dnsmasq-full
+wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall.sh" && chmod +x /tmp/install-passwall.sh && sh /tmp/install-passwall.sh && rm -f /tmp/install-passwall.sh
 ```
 
-**Install Opkg Key**
-```
-wget -O passwall.pub https://master.dl.sourceforge.net/project/openwrt-passwall-build/passwall.pub
-opkg-key add passwall.pub
-
-```
-
-**Add Repo for Passwall**
-```
-read release arch << EOF
-$(. /etc/openwrt_release ; echo ${DISTRIB_RELEASE%.*} $DISTRIB_ARCH)
-EOF
-for feed in passwall_luci passwall_packages passwall2; do
-  echo "src/gz $feed https://master.dl.sourceforge.net/project/openwrt-passwall-build/releases/packages-$release/$arch/$feed" >> /etc/opkg/customfeeds.conf
-done
-
-```
-
-**Download External Feeds**
-```
-wget https://downloads.sourceforge.net/project/v2raya/openwrt/v2raya.pub -O /etc/opkg/keys/94cc2a834fb0aa03
-```
-
-**Add Feeds To WRT (v2ray Feeds)**
-```
-echo "src/gz v2raya https://downloads.sourceforge.net/project/v2raya/openwrt/$(. /etc/openwrt_release && echo "$DISTRIB_ARCH")" | tee -a "/etc/opkg/customfeeds.conf"
-```
-
-**Install Dependecy Package**
-```
-opkg update
-opkg install kmod-nft-tproxy
-opkg install kmod-nft-socket
-opkg install xray-core
-```
->[!CAUTION]
->Oneline Dependency Install Runs Auto Intall to this Point And Do Not Use Both Ways To Install Packages. Just Use One Method.
-
-
-**Now Install Passwall-01 using**
-```
-opkg install luci-app-passwall
-```
-
-**For Install Passwall-02 - optional For Better Performing SoC.**
-```
-opkg install luci-app-passwall2 v2ray-geosite-ir
-```
 **Passwall Interface Will Look Like This**
 
 ![Passwall](https://live.staticflickr.com/65535/54793054769_c8e44c519e_c.jpg)
@@ -752,4 +697,4 @@ Project-DiluWRT is built on the shoulders of giants. Thank you!
 
 ## Your Support is Much Appriciated:
 
-<center><p><a href="https://www.buymeacoffee.com/dilu122x"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="dilu122x" /></a></p></center>
+<p><a href="https://www.buymeacoffee.com/dilu122x"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="dilu122x" /></a></p>
