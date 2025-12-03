@@ -526,9 +526,9 @@ wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization:
 
 
 >[!IMPORTANT]
->Now Add your Delays And Configs Then Connect. Make Sure to Reconnect LAN/WLAN interfaces After Start.<br>To route All Traffic Through Proxy TCP Ports must be Set To **All** In **Other Settings** And in Main Page The Proxy must Set to **Global Proxy.** Otherwise There maybe DNS Leaks. This Is The Setting For Global Proxy Routing.<br><br>
+>Now Add your Delays And Configs Then Connect. Make Sure to Reconnect LAN/WLAN interfaces After Start.<br><br>To route All Traffic Through Proxy **TCP Ports** must be Set To **All** In **Other Settings** And in Main Page The Proxy must Set to **Global Proxy.** Otherwise There maybe DNS Leaks. This Is The Setting For Global Proxy Routing.<br><br>
 **For Exclusion List-->No Proxy** <br>
-1.First Delete **Existing Shunt Rule** From Nodes And Make New Xray Shunt. Then Add New ACL Rule In **Access Control** I And Then Set TCP/UDP Nodes to Xray Shunt.<br>
+1.First Delete **Existing Shunt Rule** From Nodes And Make New Xray Shunt. Then Add New ACL Rule In **Access Control** I And Then Set TCP/UDP Nodes to Xray Shunt.<br><br>
 2.Now Select Switch to GFW List And Make China Connection As **Direct Coonection** <br>
 3.Now You Can Add Interface Source as **lan** and Exclude Desired MAC Addresses to Proxy.
 
