@@ -539,6 +539,9 @@ wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization:
 
 ### V2Ray-A For Better UI/But Poor Resource Management 
 
+>[!CAUTION]
+>Only use V2rayA If You Are Not Happy With Passwall Dont Use Both. And Make Sure to uninstall Passwall if You Installing V2rayA Router Cannot Handle both with Limited Resoureces. 
+
 **Download Required Package/Key**
 ```
 wget https://downloads.sourceforge.net/project/v2raya/openwrt/v2raya.pub -O /etc/opkg/keys/94cc2a834fb0aa03
