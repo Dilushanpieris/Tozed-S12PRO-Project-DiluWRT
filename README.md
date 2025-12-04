@@ -526,11 +526,20 @@ wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization:
 
 
 >[!IMPORTANT]
->Now Add your Delays And Configs Then Connect. Make Sure to Reconnect LAN/WLAN interfaces After Start.<br><br>To route All Traffic Through Proxy:  **TCP Ports** must be Set To **All** In **Other Settings** And in Main Page The Proxy must Set to: **Global Proxy.** Otherwise There maybe DNS Leaks. This Is The Setting For Global Proxy Routing.<br><br>
-**For Exclusion List-->No Proxy** <br><br>
-1.First Delete **Existing Shunt Rule** From Nodes And Make New Xray Shunt. Then Add New ACL Rule In **Access Control** I And Then Set TCP/UDP Nodes to Xray Shunt.<br>
-2.Now Select Switch to GFW List And Make China Connection As **Direct Coonection** <br>
-3.Now You Can Add Interface Source as **lan** and Exclude Desired MAC Addresses to Proxy.
+><u>Now Add your Delays to start. and follow these steps to configure..</u><br><br>
+**1. Add Inbound With Link in Node List** (Edit And Set Allowinsecure to True Default is False Even if we add in Con File) <br>
+**2. Go to Basic Settings Chose TCP Node And UDP Node To your V2ray File**(UDP : Same As TCP Node Is Enough then Save And Apply)<br>
+**3. Basic Settings > Mode > Switch Mode > Set to Global Proxy**  <br>
+**4. Basic Settings > Mode > Switch Mode > Untick All Lists Direct/Proxy/block/GFW** (Now Save And Apply)  <br>
+**5. Other Settings >TCP Redir Ports and UDP Redir Ports Set to All**(Then Save And Apply) <br>
+**6. All Now Configured. Go Basic settings > Main > Main Switch to ON**(Then Save And Apply) <br><br>
+<u>For Exclusion List-->No Proxy</u><br><br>
+**1. First Delete Existing Shunt Rule From Nodes And Make New Xray Shunt (Node List > Add New Type :Xray , Protocol:Shunt)** <br>
+**2. Set All Lists like Direct Game,Proxy Game, Streaming To Default** (Set default as Direct Connection) - Save And Apply <br>
+**3. Access Control > Add > Sorce Interface : lan ,  Source : Select MAC you Want to Exclude From Proxy**<br>
+**4. Set TCP Node to Xray Shunt You Created, Udp Node : Same As TCP (Save And Then Apply)**<br>
+**5. Make Excluding Rule Work Access Control > Main Switch > on**(Save And Apply)
+
 
 >[!TIP]
 >Just Like Above You Can route Any Device Through Any Node but Require Some CPU Power To Do So.(Change TCP/UDP Node)
