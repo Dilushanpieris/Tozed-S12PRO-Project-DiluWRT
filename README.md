@@ -531,8 +531,9 @@ wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization:
 **2. Go to Basic Settings Chose TCP Node And UDP Node To your V2ray File**(UDP : Same As TCP Node Is Enough then Save And Apply)<br>
 **3. Basic Settings > Mode > Switch Mode > Set to Global Proxy**  <br>
 **4. Basic Settings > Mode > Switch Mode > Untick All Lists Direct/Proxy/block/GFW** (Now Save And Apply)  <br>
-**5. Other Settings >TCP Redir Ports and UDP Redir Ports Set to All**(Then Save And Apply) <br>
+**5. Other Settings >TCP Redir Ports and UDP Redir Ports Set to DNS**(Then Save And Apply)(To Make Group Calls Over UDP Possible) <br>
 **6. All Now Configured. Go Basic settings > Main > Main Switch to ON**(Then Save And Apply) <br><br>
+
 <u>For Exclusion List-->No Proxy</u><br><br>
 **1. First Delete Existing Shunt Rule From Nodes And Make New Xray Shunt (Node List > Add New Type :Xray , Protocol:Shunt)** <br>
 **2. Set All Lists like Direct Game,Proxy Game, Streaming To Default** (Set default as Direct Connection) - Save And Apply <br>
@@ -595,7 +596,7 @@ opkg install luci-app-v2raya
 
 **Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
 
-## Step 12 - Luci Mobile Management Interface/CPU Plugin
+## Step 13 - Luci Mobile Management Interface/CPU Plugin
 
 >[!TIP]
 >This Is The Cleanest Management UI That You Can Find Just Download From Play Store And Log In Using Router Credentials.
@@ -620,7 +621,7 @@ rm /tmp/luci-app-cpu-status_0.6.1-r1_all.ipk
 >[!TIP]
 >Now Sign out From Luci And Sign Back In You Can See The CPU Satatus Of Each CPU Core .
 
-## Step 13 Samba4 Server At Shared Storeage  /Overlay.
+## Step 14 Samba4 Server At Shared Storeage  /Overlay.
 >[!CAUTION]
 >To Install Samba4 As Shared Storeage You Must first Have USB Setup As Above and Mount point must be /overlay for Samba We Weill Make Permissions And Create Directory for Optimized Usage. 
 
@@ -682,7 +683,7 @@ service samba4 restart
 <br>
 Then Sign In With your Credentials At Windows/ Linux PC
 
-## Step 14 Statistics Tab /Terminal Install.
+## Step 15 Statistics Tab /Terminal Install.
 >[!IMPORTANT]
 >This App is Capable Of Monitoring CPU/RAM/Network Interfaces Install it Using Following Commands. Already Installed on My Image
 
