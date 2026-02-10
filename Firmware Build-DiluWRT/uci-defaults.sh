@@ -1,8 +1,3 @@
-# Beware! This script will be in /rom/etc/uci-defaults/ as part of the image.
-# Uncomment lines to apply:
-#
-
-#
 root_password="dilu1212"
 lan_ip_address="192.168.2.1"
 #
@@ -23,8 +18,8 @@ if [ -n "$lan_ip_address" ]; then
 fi
 
 # Configure WLAN
-uci set wireless.default_radio0.ssid='DiluWRT_2.4G'
-uci set wireless.default_radio1.ssid='DiluWRT_5G'
+uci set wireless.default_radio0.ssid='DiluWRT_2.4G/5G'
+uci set wireless.default_radio1.ssid='DiluWRT_2.4G/5G'
 uci commit wireless
 
 # Configure PPPoE
@@ -39,6 +34,15 @@ fi
 #Set Modem Interface
 uci rename network.wwan="LTE"
 uci commit network
+
+sleep 1
+
+# 2. Add the NEW name to the Firewall WAN zone
+for section in $(uci show firewall | grep ".name='wan'" | cut -d. -f2); do
+    uci add_list firewall.$section.network='LTE'
+done
+uci commit firewall
+
 
 # Set Banner And Hostname
 uci set system.@system[0].hostname='DiluWRT'
