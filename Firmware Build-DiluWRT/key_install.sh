@@ -5,7 +5,8 @@ echo "-----------------------------------------------------"
 echo "      Project-DiluWRT Key Installer"
 echo "-----------------------------------------------------"
 echo ""
-
+opkg update 
+opkg install coreutils-base64
 # 1. Ask for the Encoded Token
 printf "Please enter your Base64 Encoded GitHub Token: "
 read GH_TOKEN_ENCODED
