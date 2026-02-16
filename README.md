@@ -525,7 +525,7 @@ wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization:
 **2. Go to Basic Settings Chose TCP Node And UDP Node To your V2ray File**(UDP : Apply your Node To As Well Do Not Choose same As TCP)<br>
 **3. Basic Settings > Mode > Switch Mode > Set to Global Proxy**  <br>
 **4. Basic Settings > Mode > Switch Mode > Untick All Lists Direct/Proxy/block/GFW** (Now Save And Apply)  <br>
-**5. Other Settings >TCP Redir Ports and UDP Redir Ports Set to DNS**(Then Save And Apply)(To Make Group Calls Over UDP Possible) <br>
+**5. Other Settings >TCP Redir Ports to All and UDP Redir Ports to DNS**(Then Save And Apply) <br>
 **6. All Now Configured. Go Basic settings > Main > Main Switch to ON**(Then Save And Apply) <br><br>
 
 <u>For Exclusion List-->No Proxy</u><br><br>
