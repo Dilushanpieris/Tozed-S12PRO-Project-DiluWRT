@@ -487,11 +487,6 @@ To Setup WAN Bandwidth Limit First Create Interfaces As Per Your Requirement Usi
 >[!IMPORTANT]
 >Format Your USB Drive To FAT32/ExFAT And Then Plug into Roter Then Install These Packages. 
 
-**For SSD USB Enclosure**
-```
- opkg install kmod-usb-storage-uas  # Optional Package
-```
-
 **One Command Exroot Config - Key Required**
 
 >[!CAUTION]
@@ -696,6 +691,16 @@ opkg install luci-app-ttyd
 **View Of Statistics APP**
 
 ![Statistics APP](https://live.staticflickr.com/65535/54812776760_b3797d7617_b.jpg)
+
+## Auto Restart using Crontab.
+>[IMPORTANT]
+>Using Passwall without a Break Can Cause ISP To Tag your Router. So To Avoid limiting Speeds / Connection Drops its Highly Recommended to Have Auto restart Set up At Desired Time . Here Is The Cron Command To Restart Router Everyday At 4.00 AM.
+
+**Navigate to Luci > System > Scheduled Tasks > And then Paste Following line Then Save And Apply**
+
+```
+0 4 * * * sleep 70 && touch /etc/banner && reboot
+```
 
 ## Acknolwlegements 
 
