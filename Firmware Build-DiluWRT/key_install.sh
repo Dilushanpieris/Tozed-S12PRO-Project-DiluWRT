@@ -27,5 +27,5 @@ echo "$GH_TOKEN_ENCODED" | base64 -d > /etc/auth/.github_token
 chmod 600 /etc/auth/.github_token
 
 echo ""
-echo "✅ Success! Key installed."
+echo "Success! Key installed."
 echo "-----------------------------------------------------"

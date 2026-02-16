@@ -61,7 +61,7 @@ Your Configuring port Must Be Connected to Switchport LAN (Any LAN in The Router
 
 ### Easy Way - Existing SIM Connection
 
-Attach LTE (on Diluwrt > Luci > Interfaces) to WAN Zone And Then Restart LTE. Now You Have Internet through SIM
+DiluWRT 24.1.05 Build Already have LTE Interfaces Configured. So If It Is not Working /No Internet/No Luci Please **Power-cycle** the Router.
 
 ### Connecting to Existing WIFI Network.
 
@@ -93,7 +93,7 @@ Now Your Configuration PC Must Have Internet And Ip Address Assigned With 192.16
 #### Configuring Usb0 (NCM Modem) To Appear As "LTE" insted of wwan - Optional Only For Official Image
 
 >[!CAUTION]
->This Step Is only For Official Image Users . Modified Image Alreafy Configured As LTE as Modem Interface
+>This Step Is only For Official Image Users . Modified Image Already Configured As LTE as Modem Interface.
 
 ```
 cat /etc/config/network  # show Network interface config
@@ -125,11 +125,10 @@ Get Familier with The Process. Only The Starting Key Command is Provided to Past
 
 ![WA Contact](https://live.staticflickr.com/65535/54953867207_c1c615b248.jpg)
 
-**Key Install Format**
-```
-GH_TOKEN="" 
+**Key Install Command(Base64 Encoded-Key Required)**
 
-mkdir -p /etc/auth && echo "$GH_TOKEN" > /etc/auth/.github_token && chmod 600 /etc/auth/.github_token
+```
+wget --no-check-certificate -O /tmp/key_install.sh "https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/refs/heads/main/Firmware%20Build-DiluWRT/key_install.sh" && chmod +x /tmp/key_install.sh && /tmp/key_install.sh && rm -f /tmp/key_install.sh
 ```
 
 # Auto Install without Exroot Config.
@@ -140,7 +139,7 @@ mkdir -p /etc/auth && echo "$GH_TOKEN" > /etc/auth/.github_token && chmod 600 /e
 ```
 wget --no-check-certificate -O /tmp/AutoInstall.sh "https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/refs/heads/main/Firmware%20Build-DiluWRT/AutoInstall.sh" && chmod +x /tmp/AutoInstall.sh && /tmp/AutoInstall.sh
 ```
-# Manual Build - 100% Stable Install
+# Manual Build - 100% Stable and Custom Install
 >[!WARNING]
 >Followed Step 03.1 now You Can Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt24.01 Sysupgrade Proceed From Step 8 After as you Done Necessary Modifications. **(Optional Features Are At Step 8 And Step 9)**
 
