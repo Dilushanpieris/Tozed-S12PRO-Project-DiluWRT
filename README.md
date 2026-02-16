@@ -693,15 +693,15 @@ opkg install luci-app-ttyd
 ![Statistics APP](https://live.staticflickr.com/65535/54812776760_b3797d7617_b.jpg)
 
 ## Auto Restart using Crontab.
->[IMPORTANT]
->Using Passwall without a Break Can Cause ISP To Tag your Router. So To Avoid limiting Speeds / Connection Drops its Highly Recommended to Have Auto restart Set up At Desired Time . Here Is The Cron Command To Restart Router Everyday At 4.00 AM.
+>[!IMPORTANT]
+>Using Passwall without a Break Can Cause ISP To Tag your Router. So To Avoid limiting Speeds / Connection Drops its Highly Recommended to Have Auto restart Set up At Desired Time . Here Is The Cron Command To Restart Router Everyday At 4.00 AM. Make Sure To Set your Time on Router Correctly.
 
 **Navigate to Luci > System > Scheduled Tasks > And then Paste Following line Then Save And Apply**
 
 ```
 0 4 * * * sleep 70 && touch /etc/banner && reboot
 ```
-
+*reboot Goes off at 4.00 AM Exactly after 70s Where time is Synced.*
 ## Acknolwlegements 
 
 This project would not be possible without the hard work and dedication of the OpenWrt community. A special thank you goes to:
