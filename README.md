@@ -522,7 +522,7 @@ wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization:
 >[!IMPORTANT]
 ><u>Now Add your Delays to start. and follow these steps to configure..</u><br><br>
 **1. Add Inbound With Link in Node List** (Edit And Set Allowinsecure to True Default is False Even if we add in Con File) <br>
-**2. Go to Basic Settings Chose TCP Node And UDP Node To your V2ray File**(UDP : Same As TCP Node Is Enough then Save And Apply)<br>
+**2. Go to Basic Settings Chose TCP Node And UDP Node To your V2ray File**(UDP : Apply your Node To As Well Do Not Choose same As TCP)<br>
 **3. Basic Settings > Mode > Switch Mode > Set to Global Proxy**  <br>
 **4. Basic Settings > Mode > Switch Mode > Untick All Lists Direct/Proxy/block/GFW** (Now Save And Apply)  <br>
 **5. Other Settings >TCP Redir Ports and UDP Redir Ports Set to DNS**(Then Save And Apply)(To Make Group Calls Over UDP Possible) <br>
@@ -590,7 +590,7 @@ opkg install luci-app-v2raya
 
 **Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
 
-## Step 13 - Luci Mobile Management Interface/CPU Plugin
+## Step 13 - Luci Mobile Management Interface
 
 >[!TIP]
 >This Is The Cleanest Management UI That You Can Find Just Download From Play Store And Log In Using Router Credentials.
@@ -602,18 +602,6 @@ opkg install luci-app-v2raya
 
 ![Luci Mobile](https://live.staticflickr.com/65535/54793147630_271f7c810d_c.jpg)
 
-**CPU Plugin Package On Luci Status Page**
-
-**Install using This**
-```
-wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.6.1-r1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.6.1-r1_all.ipk
-opkg install /tmp/luci-app-cpu-status_0.6.1-r1_all.ipk
-rm /tmp/luci-app-cpu-status_0.6.1-r1_all.ipk
-/etc/init.d/rpcd reload
-```
-
->[!TIP]
->Now Sign out From Luci And Sign Back In You Can See The CPU Satatus Of Each CPU Core .
 
 ## Step 14 Samba4 Server At Shared Storeage  /Overlay.
 >[!CAUTION]
