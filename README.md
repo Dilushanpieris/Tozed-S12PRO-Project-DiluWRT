@@ -689,6 +689,27 @@ opkg install luci-app-ttyd
 0 4 * * * sleep 70 && touch /etc/banner && reboot
 ```
 *reboot Goes off at 4.00 AM Exactly after 70s Where time is Synced.*
+
+## Passwall Switch For Night Time Data And Daytime Data.
+>[!TIP]
+>This Scripts Are Used to Turn On /OFF Passwall At The Free Data/ Night Time Period. When Installed Passwall Will Automatically Turn off At 11.59 PM And Start Back on At 8.00 AM
+
+**Install Automation Scripts - Passwall Switch**
+
+```
+wget -O /tmp/install-autoswitch.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/passwall_autoswitch_install.sh" && chmod +x /tmp/install-autoswitch.sh && sh /tmp/install-autoswitch.sh && rm -f /tmp/install-autoswitch.sh
+```
+
+**To Automate The Process Paste these Commands in Your Scheduled Tasks Tab After Installing Script**
+
+```
+# Start Passwall everyday at 8:00 AM
+0 8 * * * /usr/share/autoswitch/pw_timer.sh start
+
+# Stop Passwall everyday at 11:59 PM
+59 23 * * * /usr/share/autoswitch/pw_timer.sh stop
+```
+
 ## Acknolwlegements 
 
 This project would not be possible without the hard work and dedication of the OpenWrt community. A special thank you goes to:
