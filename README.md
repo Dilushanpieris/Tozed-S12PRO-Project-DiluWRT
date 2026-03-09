@@ -541,6 +541,15 @@ wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization:
 
 **Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
 
+### Passwall 2 Install 
+
+>[!TIP]
+>stick to passwall 01 for Better Controllability
+
+```
+wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall2.sh" && chmod +x /tmp/install-passwall2.sh && sh /tmp/install-passwall2.sh && rm -f /tmp/install-passwall2.sh
+```
+
 ### V2Ray-A For Better UI/But Poor Resource Management 
 
 >[!CAUTION]
