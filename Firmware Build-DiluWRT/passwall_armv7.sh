@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Define our two different storage locations
-ZIP_PATH="/root/passwall.zip"          # Flash Memory
+ZIP_PATH="/tmp/passwall.zip"          # Flash Memory
 EXTRACT_DIR="/tmp/passwall_install"    # RAM/Temp
 
 echo "-----------------------------------------------------"
