@@ -502,16 +502,17 @@ wget -O /tmp/exroot_config.sh --no-check-certificate --header="Authorization: to
 
 ## Step 11 V2ray A Client - VPN On OpenWRT
 
-### Passwall 01 AND Passwall 02
+### Passwall 02
+
 >[!IMPORTANT]
->Passwall Is Good At Pacakge Handling and Resource Management. **Passwall 01 is Recommended To Use In Router Like S12 Pro To limit Resource Usage (CPU)**<br>
-To Install Passwall You Must First Make Sure to Remove Dnsmasq And Install Full Version of The Package **Ignore Confile Errors**<br>
+>Passwall Is Good At Pacakge Handling and Resource Management. **Passwall 02 is Recommended To Use In Router Like S12 Pro To limit Resource Usage (CPU)**<br>
+**Ignore Confile Errors**<br>
 However the Max Speeds Can Be Achived **limited by CPU > Around 20-30mbps on Fibre uplink.**
 
 
 **One Command Install Require Auth Key**
 ```
-wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall.sh" && chmod +x /tmp/install-passwall.sh && sh /tmp/install-passwall.sh && rm -f /tmp/install-passwall.sh
+wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall2.sh" && chmod +x /tmp/install-passwall2.sh && sh /tmp/install-passwall2.sh && rm -f /tmp/install-passwall2.sh
 ```
 
 **Passwall Interface Will Look Like This**
@@ -541,14 +542,6 @@ wget -O /tmp/install-passwall.sh --no-check-certificate --header="Authorization:
 
 **Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
 
-### Passwall 2 Install 
-
->[!TIP]
->stick to passwall 01 for Better Controllability
-
-```
-wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall2.sh" && chmod +x /tmp/install-passwall2.sh && sh /tmp/install-passwall2.sh && rm -f /tmp/install-passwall2.sh
-```
 
 ### V2Ray-A For Better UI/But Poor Resource Management 
 

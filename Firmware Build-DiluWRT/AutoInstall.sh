@@ -123,6 +123,7 @@ echo ""
 echo "-----------------------------------------------------"
 echo " Configuring WIFI / WPS ....."
 echo "-----------------------------------------------------"
+opkg update
 opkg remove wpad-basic-mbedtls wpad-mini
 opkg install wpad hostapd-utils
 
