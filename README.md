@@ -32,20 +32,19 @@ How To Restore Backup And boot Back into Original Firmware [Video Link R1BNC](ht
 ## Step 03 Flash Router - Initial Setup
 
 >[!TIP]
-> You Can use Official Sysupgrade.bin from [OpenWRT S12Pro](https://downloads.openwrt.org/releases/24.10.2/targets/ramips/mt7621/openwrt-24.10.2-ramips-mt7621-tozed_zlt-s12-pro-squashfs-sysupgrade.bin) to Flash Router But The Firmware Given in The Directory is Same And Have minimal Mods Compared To Original Sysupgrade.bin
+> You Can use DiluWRT Sysupgrade.bin from [Releases - OpenWRT S12Pro](https://github.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/releases/download/Firmware/DiluWRT-24.10.5-ramips-mt7621-ZLTS12PRO-squashfs-sysupgrade.bin) to Flash Router 
 
 Flash Using Luci Interface > Upgrade/Restore > Flash Firmware / Select File Provided  (Sysupgrade.bin)
 
->openwrt-24.10.2-015ee654217a-ramips-mt7621-tozed_zlt-s12-pro-squashfs-sysupgrade
+>DiluWRT-24.10.5-ramips-mt7621-ZLTS12PRO-squashfs-sysupgrade.bin
 
-**For DiluWRT Flash my Sysupgrade From Releases TAB**
 
 ![First Boot](https://live.staticflickr.com/65535/54784179079_217072a029_b.jpg)
 
 *After Reboot You Are Done with Flashing And Now You Can Log into Luci Interface With Following . SSH And WebUi both Enabled.*
 
 
-**LUCI Interface** : http://192.168.2.1 (If You Flashed My Sysupgrade otherwise http://192.168.1.1)
+**LUCI Interface** : http://192.168.2.1
 
 **SSH Login/Default Login Luci (Can Change Later with Luci Interface)** <br>
 * Username : root  
@@ -89,23 +88,6 @@ Now Your Configuration PC Must Have Internet And Ip Address Assigned With 192.16
 ```
 /etc/init.d/network restart  # hard Reset Network Stack.
 ```
-
-#### Configuring Usb0 (NCM Modem) To Appear As "LTE" insted of wwan - Optional Only For Official Image
-
->[!CAUTION]
->This Step Is only For Official Image Users . Modified Image Already Configured As LTE as Modem Interface.
-
-```
-cat /etc/config/network  # show Network interface config
-vi /etc/config/network   # Open Vim Editor 
-```
-* Press i to Enter edit mode And Edit wwan Interface Name As "LTE" Do Not Touch Other Entries. 
-* Press Esc to Exit Edit Mode And Type :wq Then Press Enter to Save And Exit.
-* Perform Reboot And Make sure to Reboot Network Stack Manually As Well.
-
->[!IMPORTANT]
->Now You Can See The Usb0 Modem Interface Has Changed but Firewall Rule Is Incorrect. Head Over to Interfaces > Locate Interface LTE (Usb0) > Edit > Firewall Settings > Attach to Wan Zone > Save And Apply
-
 Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 
 **Reboot For Better Stability**
@@ -118,8 +100,8 @@ Please Ignore Dynamic interfaces When Using NCM Modem. (Ex : LTE_4)
 **Add My Github Key**
 
 >[!CAUTION]
->Before Requesting Key : <br>**Fully Read The Guideline From Start to End And Undersatnd The Process.** <br> **Installed DiluDRT Sysupgrade**<br> **Router Have Working Internet Connection**<br>
-Get Familier with The Process. Only The Starting Key Command is Provided to Paste to your SSH Console. 
+>Before Requesting Key : <br>**Fully Read The Guideline From Start to End And Undersatnd The Process.** <br> **Installed DiluWRT Sysupgrade**<br> **Router Have Working Internet Connection**<br>
+Get Familier with The Process. Only The Encoded Key is Provided to Paste to your SSH Console. 
 
 **Get Install Key From**
 
@@ -131,193 +113,41 @@ Get Familier with The Process. Only The Starting Key Command is Provided to Past
 wget --no-check-certificate -O /tmp/key_install.sh "https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/refs/heads/main/Firmware%20Build-DiluWRT/key_install.sh" && chmod +x /tmp/key_install.sh && /tmp/key_install.sh && rm -f /tmp/key_install.sh
 ```
 
-# Auto Install without Exroot Config.
+# Auto Install without Exroot/Passwall Config.
 >[!CAUTION]
->This Is The Simple Install Method for Those Who only Need DiluWRT Build Without Custom Configs. If You Use This Build Will Be All Auto Installed Till Step 8. Please Make Sure you Have Followed Till Step 03 And Have Working internet To Router Test with **opkg update**
+>This Is The Simple Install Method for Those Who only Need DiluWRT Build Without Exroot/Passwall. If You Use This Build Will Be All Auto Installed Till Step 8. Please Make Sure you Have Followed Till Step 03 And Have Working internet To Router Test with **opkg update**
 
 ## One Click Install Command
 ```
-wget --no-check-certificate -O /tmp/AutoInstall.sh "https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/refs/heads/main/Firmware%20Build-DiluWRT/AutoInstall.sh" && chmod +x /tmp/AutoInstall.sh && /tmp/AutoInstall.sh
+wget -O /tmp/oneline-install.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/oneline-install.sh" && chmod +x /tmp/oneline-install.sh && sh /tmp/oneline-install.sh && rm -f /tmp/oneline-install.sh
 ```
 # Manual Build - 100% Stable and Custom Install
 >[!WARNING]
->Followed Step 03.1 now You Can Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt24.01 Sysupgrade Proceed From Step 8 After as you Done Necessary Modifications. **(Optional Features Are At Step 8 And Step 9)**
+>Followed Step 03.1 now You Can Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt 24.01 Sysupgrade To Build Manually Simply Head Over To Markdown Listed Here. 
+
+**[Manual build - DiluWRT](https://github.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/blob/main/Firmware%20Build-DiluWRT/manual_install_readme.md)**
 
 
-## Step 04 - Package Management/Themes
-
-**Package Management**
-
-Now Your S12-pro Have Internet Access Test With Luci > Network > Diagnostics > Ping/tracert Results must not Have Packet loss. 
-
-Now Head To Luci Package Manager. Luci > System > Software > And update List
-
->[!WARNING]
->but Do Not **Upgrade** Packages Via SSH As it Can Cause Glitches. Only **Upgrade** Packages From Luci. My Firmware was built with Latest packages for today And you may not have much packages to Upgrade in Later Use.
-
-**See if These Packages Are Installed**
-```
-opkg update
-opkg install luci-compat
-opkg install luci-lib-ipkg
-```
-
-**Luci-Argon-Full Theme Install Using wget-Require Auth Key to Work**
-```
-wget -O /tmp/argon-remote-install.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-argon-theme.sh" && chmod +x /tmp/argon-remote-install.sh && sh /tmp/argon-remote-install.sh && rm -f /tmp/argon-remote-install.sh
-```
-
->[!NOTE]
->This Will Fully Install Argon Theme With [Argon Config Package](https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.9/luci-app-argon-config_0.9_all.ipk) ignore Argon-config Errors As The File is not Yet Created When Installing. 
-
-**Log out From Luci And Log Back In**
-
->[!WARNING]
->Argon Best Runs on Google Chrome Rather Than MS Edge And Firefox So Make Sure to use Naitive Apllications For Web UI.
+## Little Tour of DiluWRT Firmware (Images)
 
 **Argon Theme Preview**
 
 ![Theme Argon](https://live.staticflickr.com/65535/54783098247_548dfbcd4b_b.jpg)
 
-### Dashboard Install Oneline Command - Require Auth Key.
-
-```
-wget -O /tmp/install-dashboard.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-dashboard.sh" && chmod +x /tmp/install-dashboard.sh && sh /tmp/install-dashboard.sh && rm -f /tmp/install-dashboard.sh
-```
 
 **Preview Of Dashboard**
 
 ![Dashboard Preview](https://live.staticflickr.com/65535/54832039002_53d9e07bf9_b.jpg)
 
-## Step 05 Configure Signal Lights / Modem Lights / LTE Network Watchdog
-
-### See If The Drivers Are Installed
-```
-opkg install kmod-usb-serial kmod-usb-serial-option sms-tool
-```
-To Test Use Following AT Command That Verify sms_tool And Modem Communication (Standerd Port is /dev/ttyUSB3)
-
-```
-sms_tool -d /dev/ttyUSB3 at "AT+CSQ" 2>/dev/null
-```
-
->[!NOTE]
->Must Output  +CSQ: 5,99 According to Signal Value. Even Without A Sim Card Some Modems Are Capable Of Reading CSQ Values. Only Use This For Testing sms_tool package is Working Correctly.
-
-<hr>
-
-### Watchdog Service For NCM Modem (usb0)
-
->[!IMPORTANT]
->This Is A MUST Script to Function LTE Modem in Both Reboots And Power Cycles.Otherwise The Modem Will Hang and won't Attach When performing Reboot Also There is a Possibility to Boot Hang The Modem in either conditions And Will Require Manual Network Stack restart. This Section Solve Those Problems By Modem-Watchdog Service.
-
-**One Command Install - Modem-Watchdog-Service-Auth Key Required**
-
->[!IMPORTANT]
->Modem Interface Name Is Required to Run This Script Correctly If You Have Changed it please **NOTE** it Down Using Luci > Interfaces. <br>In Default sqashfs_openwrt it must be **wwan** and in DiluWRT_sqashfs its **LTE**. Then Run Following Command It Will Create All The Files And Services to Modem Watchdog.
-
-```
-wget -O /tmp/modem_service_01.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-watchdog.sh" && chmod +x /tmp/modem_service_01.sh && sh /tmp/modem_service_01.sh && rm -f /tmp/modem_service_01.sh
-```
-
->[!CAUTION]
->To Test The Service Make sure you Have given Correct input to Interface Name otherwise It Will Attach Usb0 to modem And The Script Will Exit (Failsafe Condition) **Then Run Following Command on CLI to See Weather the Modem Reconnects/Script Exits (Modem-UP).** if The Network Stack Restart more Than 3 Times That means you Have Provided Wrong interface And may require to Run Install Command Again. 
-
-
-**Test Logs With**
-```
-logread -e 'modem-watchdog'
-```
-
->[!NOTE]
->Reboot To Test The Service Function After CLI Test NCM Modem Will Now Be Attached to Usb0 in every reboot.
-
-<hr>
-
-### Signal Indicator light Configs
->[!IMPORTANT]
->This Section Scripts Are Meant to Control LEDs With Custom Scripts That Respond To AT Commands Using sms_tool Library Before Procceding Further Make Sure that sms_tool Is Fully Functional By Using Test Commands
-
-**Single Command Install Require Auth Key**
-
->[!WARNING]
->To Run Below Command The Git hub Key Must Be Installed into Router First. it Will Create Modem Watchdog Service.
-
-```
-wget -O /tmp/modem_service_02.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-led-controls.sh" && chmod +x /tmp/modem_service_02.sh && sh /tmp/modem_service_02.sh && rm -f /tmp/modem_service_02.sh
-```
-
->[!NOTE]
->Now Your Router Has All Functional lights And Signal indicators. Test by Using SIM Card That Have Signifficant Signal Strength. And Vary the Place If Necessary.
-
-![Preview Router](https://live.staticflickr.com/65535/54784186628_995f51e5da_z.jpg)
-
-## Step 06 Modem Management Interface - 3ginfo-lite/AT Commands/ModemBand
->[!TIP]
->To Install 3ginfo Lite Package you Must First Add Custom Feeds From [4IceG Custom Feeds](https://github.com/4IceG/Modem-extras) Here I Have Forked All The Codes Needed to Fully Setup 3gInfo-Lite Package. 
-
-**Install Custom Feeds**
-```
-grep -q IceG_repo /etc/opkg/customfeeds.conf || echo 'src/gz IceG_repo https://github.com/4IceG/Modem-extras/raw/main/myrepo' >> /etc/opkg/customfeeds.conf
-wget https://github.com/4IceG/Modem-extras/raw/main/myrepo/IceG-repo.pub -O /tmp/IceG-repo.pub
-opkg-key add /tmp/IceG-repo.pub
-opkg update
-```
-
-### 3ginfo-Lite Luci App
-
-**Now You Can install Official 3ginfo-Lite Package From [4IceG](https://github.com/4IceG/luci-app-3ginfo-lite?tab=readme-ov-file) Use These Commands**
-
-```
-opkg install luci-app-3ginfo-lite
-```
->[!IMPORTANT]
->This Script From 4IceG Does not Work Staright Away. As it Lack Support For Modem LT72-A Now We Will Replace it With Out Own Script to Make It Work. You Can Test it on Luci > Modem >3G/4G Connection
-
-**One Command update Require Key Form Git**
-```
-wget -O /tmp/3ginfo-update.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/update3ginfo-lite.sh" && chmod +x /tmp/3ginfo-update.sh && sh /tmp/3ginfo-update.sh && rm -f /tmp/3ginfo-update.sh
-```
-
->[!TIP]
->Now Perfom Reboot For Optional Stability And Test Luci For Signal Indicator Page Configuration Page Also included.
 
 **View of 3gInfo-Lite Package**
 
 ![3ginfo-lite](https://live.staticflickr.com/65535/54785920988_8793134957_b.jpg)
 
-### AT Commands Section - for Debugging/Testing 
-```
-opkg install luci-app-atcommands
-```
-**Now You Can See AT Commands Section In the Modem Section.**
-
-### Band Locking using Modemband Package
->[!IMPORTANT]
->This Package Is Not Fully Supported By Default Just like 3ginfo Package So We May Need To Have Custom Configs To Send Band Lock Commands.Update Using Following Command from wget
-
-```
-opkg install luci-app-modemband
-```
-
-
-**One Command Update -Require Auth Key**
-
-```
-wget -O /tmp/remote_update.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/main/Update_Scripts/update-modemband.sh" && chmod +x /tmp/remote_update.sh && sh /tmp/remote_update.sh && rm -f /tmp/remote_update.sh
-```
-
-## Step 07 - Wireless Interface Configuration (WPS/WPA2/PSK)
+## Step 04 - Wireless Interface Configuration (WPS/WPA2/PSK)
 >[!CAUTION]
->As a Default Wireless Interfaces Does Not Have Encryption bound in. Wifi toggle Button Usually Works on Tozed S12 Pro And The WPS Button is Disabled by Default for Security Enforcement. But It Can Be Enabled For Use As Follows. **Only Enable WPS if Necessary**
+>As a Default Wireless Interfaces Does Not Have Encryption bound in. Wifi toggle Button Usually Works on Tozed S12 Pro And The WPS Button is Disabled by Default for Security Enforcement. But It Can Be Enabled For Use As Follows. **Only Enable WPS if Necessary** You Will Be propmted to Install **Either Passwall Switch or WPS Switch on OnelineInstall.** Use With Caution
 
-### Initial Setup - WPS/WIFI AP Security
-
-**Test If The Pacakges Are Fully Installed**
-```
-opkg remove wpad-basic-mbedtls wpad-mini
-opkg install wpad hostapd-utils
-```
 
 >[!IMPORTANT]
 >Make Sure To Configure APs with Encryption And Perform Reboot Then you Can Head Over To Luci > Wireless >Security And then Enable WPS Support For Desired AP. (2.4Ghz) Recommended. 
@@ -330,96 +160,21 @@ opkg install wpad hostapd-utils
 
 <hr>
 
-### WPS LED SCRIPTS
->[!WARNING]
->You Must Enable WPS For Required Interface otherwise Following Scripts Won't Work.Careful When Selecting Interfaces. and Leds.
-
-**One Command Install WPS_LED Require Auth Key**
-```
-wget -O /tmp/install-wps-led-service.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/wps-led-install.sh" && chmod +x /tmp/install-wps-led-service.sh && sh /tmp/install-wps-led-service.sh && rm -f /tmp/install-wps-led-service.sh
-reboot
-```
 
 >[!NOTE]
 >Now When you Press WPS Button The LED Of Your Choice (Power:yellow) Will Light up until The WPS Success or Timeout after 120 Secs. 
 
-## Step 08 - MultiWan Failover Setup
->[!CAUTION]
->This Section Is To Configure Multiwan Failover Setup That Handle 2 or More WAN Connections to Router And Switch Between According to Metric Value Assigned. **Keep In mind That Mwan3 Uses old Firewall 3 And it Can Cause Problems With Newer Firewall 04 So Use It At your Risk** For Simple Failover you Can Use Gateway Metrics At Interfaces.
 
-### Initial Installian
-
-**Start By Installing This**
-```
-opkg update
-opkg install luci-app-mwan3
-```
-**Now Head Over to Luci > Network > MultiWan Manager > Add Modem Interface To Interface Section In My Case LTE**
-
->[!WARNING]
->Remove All The Interfaces/Members/ Policies Otherwise Internet Won't Work As Expected In Configuring PC 
-
-![MwManager View](https://live.staticflickr.com/65535/54786495806_40c39a3f68_b.jpg)
+ ## Making LAN Port 04 As A Permanant Uplink With Priority Metrics.
 
 >[!IMPORTANT]
 >IF You Plan to Use LAN Port 04 (Switch Port: Wan) As A Main Internet Connection From Home Router/ISP Head Over To Network > Devices And Configure Br-Lan And **De-attach Switchport:wan** From the Bridge. Then Create New Interface With with Switchport:wan And Assign WAN Firewall Rule. Make Sure to Add Gateway Metrics In The Interfaces Tab.
 
 **Set Gateway Metrics in Network > Interfaces Tab Lower Gateway Metrics Means High Priority.** <br>
->HomeWan Metric = 5 | HomeNet Metric = 10 | LTE Metric = 15 Means HomeNet Have More Priority Over LTE.
-
-**Now Attach Interfaces In MultiWAN Manager**
->[!WARNING]
->To Correctly Check Weather The Interface Is Up Or Not. Use Google/ Cloufalre DNS To Ping Otherwise Its Not Able to Detect the Interface Is Up or Not.<br>
-**Google 8.8.8.8** <br>
-**Cloudflare 1.1.1.1**
+>| HomeNet Metric = 5 | LTE Metric = 2 Means LTE Have More Priority Over HomeNET. LanPort 4 Works Only When The LTE Is Down.
 
 
-### Mwan3 Settings/ Advanced Settings - Interfaces
-**Interfaces-Mwan Manager**
-
-![Mwan Settings-intf](https://live.staticflickr.com/65535/54788384854_8a243b2156_b.jpg)
-
-**Settings to Track Interface status**
-
-![Tracking Params](https://live.staticflickr.com/65535/54788409508_bbae41b7a4.jpg)
-
->Must Add Tracking To All Wan Interfaces Here I Have Added to HomeWan | HomeNet | LTE
-
-### Mwan3 Settings/ Advanced Settings - Members
-
-**Now Define New Members Of MultiWan**
-
-![Member Configs](https://live.staticflickr.com/65535/54788153281_fe4b060374_b.jpg)
->[!TIP]
->Metrics Are only Used In This Setup to Control Simple Failover Rule . It Determines Priority of Members And Weight is not Set Due to This Failover Setup Is Not Designed to Split Traffic between WAN Connections. If You Want To Split Traffic The Weight Calculations Are Follows . (If not Keep it defualt just To Switch)
-<br><br>
-HomeNet | **Metric 10** **Weight 200**<br>
-LTE       | **Metric 15** **Weight 300**<br>
-**Weight is Irrelevent Here only Switches using Metrics Low Metric = High Priority**
-<br><hr>
-HomeNet | **Metric 3** **Weight 200**<br>
-LTE       | **Metric 3** **Weight 300**<br><br>
-**Total Weight = 300+200 = 500**<br>
-HomeNet Traffic = 200/500 = 0.4 (40% of Total Traffic) <br>
-LTE Traffic = 300/500 = 0.6 (60% of Total Traffic)
-
-
-### Mwan3 Settings/ Advanced Settings - Policies
-
-**Now Configure Policy And Attach All The Members We Created**
-
-![Policy Image](https://live.staticflickr.com/65535/54788409498_fbe382c074_b.jpg)
-
->[!NOTE]
->One Policy That Have All The Members Is Enough to Switch Between Mambers . if you Plan to Split Traffic you May Require More than one policies.
-
-**Now Attach New Policy into https/default_rule_v4 To Route Traffic Save And Apply**
-
-![Policy Table](https://live.staticflickr.com/65535/54787310492_7c30d8e3c4_b.jpg)
-
-**Now Router Will Switch Between Interfaces According to Metrics And I Have Tested With 3 WAN Connections.**
-
-## Step 09 - Smart Traffic Control QoS/SQM
+## Step 05 - Smart Traffic Control QoS/SQM
 >[!TIP]
 >Used For Limit Bandwidth Between WAN And LAN Netwroks to Manage Traffic Upon Uplink Router / LAN Connections To Router. This Section Divided Into <br>
 * WAN SQM(Smart Queue Management) <br>
@@ -464,7 +219,7 @@ To Setup WAN Bandwidth Limit First Create Interfaces As Per Your Requirement Usi
 
 ![LAN SQM](https://live.staticflickr.com/65535/54791182534_c8b700b543_b.jpg)
 
-## Step 10 - USB As a Package Storage 
+## Step 06 - USB As a Package Storage 
 
 ### Hardware Mods.
 >[!IMPORTANT]
@@ -492,7 +247,7 @@ To Setup WAN Bandwidth Limit First Create Interfaces As Per Your Requirement Usi
 >Make Sure You Have Plugged In USB And Have Proper Internet Connection. If There Is Issue With Package Checks Abort Script And Then Try Again 
 
 ```
-wget -O /tmp/exroot_config.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/exroot_config.sh" && chmod +x /tmp/exroot_config.sh && sh /tmp/exroot_config.sh && rm -f /tmp/exroot_config.sh
+wget -O /tmp/exroot-config.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/exroot-config.sh" && chmod +x /tmp/exroot-config.sh && sh /tmp/exroot-config.sh && rm -f /tmp/exroot-config.sh
 ```
 
 >[!NOTE]
@@ -500,7 +255,7 @@ wget -O /tmp/exroot_config.sh --no-check-certificate --header="Authorization: to
 
 ![ExRoot USB](https://live.staticflickr.com/65535/54791040771_c398cb014f_c.jpg)
 
-## Step 11 V2ray A Client - VPN On OpenWRT
+## Step 07 V2ray A Client - VPN On OpenWRT
 
 ### Passwall 02
 
@@ -512,7 +267,7 @@ However the Max Speeds Can Be Achived **limited by CPU > Around 20-30mbps on Fib
 
 **One Command Install Require Auth Key**
 ```
-wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall2.sh" && chmod +x /tmp/install-passwall2.sh && sh /tmp/install-passwall2.sh && rm -f /tmp/install-passwall2.sh
+wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/install-passwall2.sh" && chmod +x /tmp/install-passwall2.sh && sh /tmp/install-passwall2.sh && rm -f /tmp/install-passwall2.sh
 ```
 
 **Passwall Interface Will Look Like This**
@@ -520,79 +275,84 @@ wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization
 ![Passwall](https://live.staticflickr.com/65535/54793054769_c8e44c519e_c.jpg)
 
 
->[!IMPORTANT]
-><u>Now Add your Delays to start. and follow these steps to configure..</u><br><br>
-**1. Add Inbound With Link in Node List** (Edit And Set Allowinsecure to True Default is False Even if we add in Con File) <br>
-**2. Go to Basic Settings Chose TCP Node And UDP Node To your V2ray File**(UDP : Apply your Node To As Well Do Not Choose same As TCP)<br>
-**3. Basic Settings > Mode > Switch Mode > Set to Global Proxy**  <br>
-**4. Basic Settings > Mode > Switch Mode > Untick All Lists Direct/Proxy/block/GFW** (Now Save And Apply)  <br>
-**5. Other Settings >TCP Redir Ports to All and UDP Redir Ports to DNS**(Then Save And Apply) <br>
-**6. All Now Configured. Go Basic settings > Main > Main Switch to ON**(Then Save And Apply) <br><br>
+## Passwall Node/Routing Rule Mods
 
-<u>For Exclusion List-->No Proxy</u><br><br>
-**1. First Delete Existing Shunt Rule From Nodes And Make New Xray Shunt (Node List > Add New Type :Xray , Protocol:Shunt)** <br>
-**2. Set All Lists like Direct Game,Proxy Game, Streaming To Default** (Set default as Direct Connection) - Save And Apply <br>
-**3. Access Control > Add > Sorce Interface : lan ,  Source : Select MAC you Want to Exclude From Proxy**<br>
-**4. Set TCP Node to Xray Shunt You Created, Udp Node : Same As TCP (Save And Then Apply)**<br>
-**5. Make Excluding Rule Work Access Control > Main Switch > on**(Save And Apply)
+>[!WARNING]
+>Proper Node Routing is Possible With Xray Core only, So If You Want To Configure Fallback/Backup Nodes Please Install Old Xray Core (Passwall 25). Multiple Nodes,Exclusions,URL Exclusions(Direct Lists) Can Be Configured Either With XrayCore Or Singbox Core. 
 
+# XRAY CORE ROUTING CONFIGURATION
 
 >[!TIP]
->Just Like Above You Can route Any Device Through Any Node but Require Some CPU Power To Do So.(Change TCP/UDP Node)
+>By using an Xray Balancer Wrapper set to Fallback Mode, You Can Use Two Configs Main Config And The Backup Config to Make Your Router More Reliable to Server Side Drops.Its Only Possible From Xray Core Heres how We Setup Failover Nodes. 
+
+**Implementaion - Failover Nodes**
+1) Add Your Main Node And Secondry Node As Usual (Node List > Add Node Via Link)
+2) Now Add New Node Using Add Button 
+3) Configure As 
+                Remarks : Give A Name As Failover/Backup Node
+                Type : Xray
+                Protocol : Balancing
+                Add Main node As Load Balancing Node 
+                Add Secondry node As Fallback Node (To Run if Main Node Failed)
+                Balancing Stratergy : LeastPing
+4) Now Save And Apply (Use Newly Created Node As Main Node in The Basic Settings Page)
+
+>[!IMPORTANT]
+>Shunt Is Just like A Switch For Passwall Nodes you Can Tie Node or Direct node With Custom Lists. Here Is How You Can Exclude Device With A Shunt Rule Of Direct And ACL
+
+**Implementaion - Shunt Nodes**
+
+1) Go No Node List And Add New Node
+2) Configure New Node As <br>
+                Remarks : Give Name As Shunt Direct<br>
+                Type : Xray<br>
+                Protocol : Shunt<br>
+                Set Default + All Lists To Direct Connection<br>
+3) Now You Can Setup Any Devices to Exclude Nodes With This Shunt
+
+
+
+**Implementaion - ACL-Access Control for Devices**
+
+1) Now Create New ACL Rule in The ACL Tab
+2) ACL Rule Configure As :<br>
+                Remarks :  LAN Direct<br>
+                Source Interface : All<br>
+                Source : Select your Mac<br>
+                Node:   Select Shunt Rule For Fully Exclude Device from Node.<br>
+                        Select Specific Node For Use That node For This Selected MAC/Device<br>
+                Keep Rest As Default<br>
+3) Save And Apply with Main witch ON (ACL)
+            
+**Implementaion - Exclusion-Domains**
+
+1) Create New List on Rule Manage As Direct_list <br>
+2) Add Domains in This Format(Toplevel/Individual)<br>
+
+```
+domain:lk
+domain:dialog.lk
+domain:slt.lk
+geosite:category-ads-all
+```
+3) Now go to Node List And Create New Node Then Configure As :<br>
+                Remarks : Give Name As Shunt Main<br>
+                Type : Xray<br>
+                Protocol : Shunt<br>
+                Set Direct list to Direct Connection<br>
+                Default to Your Failover/ Main Node <br>
+                Save And Apply <br>
+
+4) Now Use This Newly created Shunt Rule As your Main Node.
+
+>[!IMPORTANT]
+> You Can Combine These Routing Mechanisms To Implement for Ultimate Passwall Experience. With Failover Nodes + Each Node For Each Devices (MAC-Exclude) And Fully Excluded Devices With Shunt Rules. Also you Can Configure Rules (Lists) With your Custom Lists To Either Exclude Them From Passwall or Make them Route Through Specific Node. (Just Select Node you Want)
 
 **Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
 
 
-### V2Ray-A For Better UI/But Poor Resource Management 
 
->[!CAUTION]
->Only use V2rayA If You Are Not Happy With Passwall Dont Use Both. And Make Sure to uninstall Passwall if You Installing V2rayA Router Cannot Handle both with Limited Resoureces. 
-
-**Download Required Package/Key**
-```
-wget https://downloads.sourceforge.net/project/v2raya/openwrt/v2raya.pub -O /etc/opkg/keys/94cc2a834fb0aa03
-```
-
-**Add Feeds To WRT (v2ray Feeds)-If You Have Already Installed Passwall Skip this Step**
-```
-echo "src/gz v2raya https://downloads.sourceforge.net/project/v2raya/openwrt/$(. /etc/openwrt_release && echo "$DISTRIB_ARCH")" | tee -a "/etc/opkg/customfeeds.conf"
-```
-
-**Reload Feeds**
-```
-opkg update
-```
-**Now Install V2rayA-Dependency Package**
-```
-opkg install v2raya
-opkg install kmod-nft-tproxy
-opkg install xray-core
-```
-
-**Luci App Install V2ray-A**
-```
-opkg install luci-app-v2raya
-```
-
-**Reboot For Optional Stability**
-
-![Luci V2rayA](https://live.staticflickr.com/65535/54791457850_0e30b69b6f_b.jpg)
-
-### V2ray A Dashboard
->[!NOTE]
->It Is Usally Disabled by Default And you May Enable And Open Web interface its Usually At Routerip:2017 And And From That interface you Can Configure All v2ray (Multisocket) Rules. Make Sure to Create Uname And Pass on First login.
-
-**Now Import Settings like VLESS/VMESS Then Change Settings As Follows**
-
-![V2rayA](https://live.staticflickr.com/65535/54791457750_cb2f3b7d81_b.jpg)
-
-**Settings (Proxy Configs) For V2rayA**
-
-![Proxy V2rayA](https://live.staticflickr.com/65535/54783098227_98c34fd613_z.jpg)
-
-**Now Test Using [Ip-Leak](https://ipleak.net/) / [Speedtest.net](https://www.speedtest.net/) For Location**
-
-## Step 13 - Luci Mobile Management Interface
+## Step 08 - Luci Mobile Management Interface
 
 >[!TIP]
 >This Is The Cleanest Management UI That You Can Find Just Download From Play Store And Log In Using Router Credentials.
@@ -605,9 +365,9 @@ opkg install luci-app-v2raya
 ![Luci Mobile](https://live.staticflickr.com/65535/54793147630_271f7c810d_c.jpg)
 
 
-## Step 14 Samba4 Server At Shared Storeage  /Overlay.
+## Step 09 Samba4 Server As Shared Storage  /Overlay.
 >[!CAUTION]
->To Install Samba4 As Shared Storeage You Must first Have USB Setup As Above and Mount point must be /overlay for Samba We Weill Make Permissions And Create Directory for Optimized Usage. 
+>To Install Samba4 As Shared Storage You Must first Have USB Setup As Above and Mount point must be /overlay for Samba We Weill Make Permissions And Create Directory for Optimized Usage. 
 
 ```
 ls /overlay
@@ -667,7 +427,7 @@ service samba4 restart
 <br>
 Then Sign In With your Credentials At Windows/ Linux PC
 
-## Step 15 Statistics Tab /Terminal Install.
+## Step 10 Statistics Tab /Terminal Install.
 >[!IMPORTANT]
 >This App is Capable Of Monitoring CPU/RAM/Network Interfaces Install it Using Following Commands. Already Installed on My Image
 
@@ -680,37 +440,6 @@ opkg install luci-app-ttyd
 **View Of Statistics APP**
 
 ![Statistics APP](https://live.staticflickr.com/65535/54812776760_b3797d7617_b.jpg)
-
-## Auto Restart using Crontab.
->[!IMPORTANT]
->Using Passwall without a Break Can Cause ISP To Tag your Router. So To Avoid limiting Speeds / Connection Drops its Highly Recommended to Have Auto restart Set up At Desired Time . Here Is The Cron Command To Restart Router Everyday At 4.00 AM. Make Sure To Set your Time on Router Correctly.
-
-**Navigate to Luci > System > Scheduled Tasks > And then Paste Following line Then Save And Apply**
-
-```
-0 4 * * * sleep 70 && touch /etc/banner && reboot
-```
-*reboot Goes off at 4.00 AM Exactly after 70s Where time is Synced.*
-
-## Passwall Switch For Night Time Data And Daytime Data.
->[!TIP]
->This Scripts Are Used to Turn On /OFF Passwall At The Free Data/ Night Time Period. When Installed Passwall Will Automatically Turn off At 11.59 PM And Start Back on At 8.00 AM
-
-**Install Automation Scripts - Passwall Switch**
-
-```
-wget -O /tmp/install-autoswitch.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/passwall_autoswitch_install.sh" && chmod +x /tmp/install-autoswitch.sh && sh /tmp/install-autoswitch.sh && rm -f /tmp/install-autoswitch.sh
-```
-
-**To Automate The Process Paste these Commands in Your Scheduled Tasks Tab After Installing Script**
-
-```
-# Start Passwall everyday at 8:00 AM
-0 8 * * * /usr/share/autoswitch/pw_timer.sh start
-
-# Stop Passwall everyday at 11:59 PM
-59 23 * * * /usr/share/autoswitch/pw_timer.sh stop
-```
 
 ## Acknolwlegements 
 
