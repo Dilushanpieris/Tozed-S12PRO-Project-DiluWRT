@@ -370,50 +370,13 @@ geosite:category-ads-all
 >To Install Samba4 As Shared Storage You Must first Have USB Setup As Above and Mount point must be /overlay for Samba We Weill Make Permissions And Create Directory for Optimized Usage. 
 
 ```
-ls /overlay
-mkdir /overlay/share
-chmod 777 /overlay/share
-ls -l /overlay/
-
-```
->[!NOTE]
->Check for share Directory it must Have All The Permissions (drwxrwxrwx ) to Read Wand Write .Do Not Change Permissions If you Want Read only.
-
-**Install Required Packages**
-```
-opkg update
-opkg install samba4-server
-opkg install luci-app-samba4
-reboot
+wget -O /tmp/config-samba4.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/config-samba4.sh" && chmod +x /tmp/config-samba4.sh && sh /tmp/config-samba4.sh && rm -f /tmp/config-samba4.sh
 ```
 
 **Now Add Name And Path As Follows Path > /overlay/share**
 
 ![Samba 4 Add Path/Name](https://live.staticflickr.com/65535/54812433446_fa77937e6a_b.jpg)
 
-
-**Reboot for Configure refresh**
-
-**Add Password Access For Server**
-
-```
-vi /etc/passwd
-```
-**Add This line at The End With Names <newuser> to Replace with Your Own**
-
-```
-newuser:*:1000:65534:newuser:/var:/bin/false
-```
-
-**Add Passsword For New User <Newuser> replace With your username**
-```
-smbpasswd -a newuser
-```
-**Restart Samba4 Service**
-
-```
-service samba4 restart
-```
 
 >[!IMPORTANT]
 >Share Dir Path **/overlay/share**
