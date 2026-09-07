@@ -127,7 +127,7 @@ wget -O /tmp/oneline-install.sh --no-check-certificate --header="Authorization: 
 >This Is The Newsest Install Method for Those Who Need DiluWRT Build With Cloud-Based Passwall. If You Use This Build Will Be All Auto Installed Including Light Configs/Automation Scripts. Please Make Sure you Have Followed Till Step 03(Key-Install) And Have Working internet To Router Test with **opkg update** Router Must Have Small Amount of Data Everytime Router Boots(About 10Mb).
 
 ```
-wget -O /tmp/oneline-install-cloud-proxy.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/oneline-install-cloud-proxy.sh" && chmod +x /tmp/oneline-install-cloud-proxy.sh && sh /tmp/oneline-install-cloud-proxy.sh && rm -f /tmp/oneline-install-cloud-proxy.sh
+yet To Come .
 ```
 
 # Manual Build - 100% Customized Install-Works on almost Every Image Till 24.10.08
