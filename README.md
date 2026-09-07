@@ -113,15 +113,24 @@ Get Familier with The Process. Only The Encoded Key is Provided to Paste to your
 wget --no-check-certificate -O /tmp/key_install.sh "https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/refs/heads/main/Firmware%20Build-DiluWRT/key_install.sh" && chmod +x /tmp/key_install.sh && /tmp/key_install.sh && rm -f /tmp/key_install.sh
 ```
 
-# Auto Install without Exroot/Passwall Config.
+# Auto Install Config.
 >[!CAUTION]
 >This Is The Simple Install Method for Those Who only Need DiluWRT Build Without Exroot/Passwall. If You Use This Build Will Be All Auto Installed Till Step 8. Please Make Sure you Have Followed Till Step 03 And Have Working internet To Router Test with **opkg update**
 
-## One Click Install Command
+## One-Line Install Command - Without Exroot/Passwall
 ```
 wget -O /tmp/oneline-install.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/oneline-install.sh" && chmod +x /tmp/oneline-install.sh && sh /tmp/oneline-install.sh && rm -f /tmp/oneline-install.sh
 ```
-# Manual Build - 100% Stable and Custom Install
+
+## One-Line Install Command - Cloud Based Passwall (No_Exroot)
+>[!IMPORTANT]
+>This Is The Newsest Install Method for Those Who Need DiluWRT Build With Cloud-Based Passwall. If You Use This Build Will Be All Auto Installed Including Light Configs/Automation Scripts. Please Make Sure you Have Followed Till Step 03(Key-Install) And Have Working internet To Router Test with **opkg update** Router Must Have Small Amount of Data Everytime Router Boots(About 10Mb).
+
+```
+wget -O /tmp/oneline-install-cloud-proxy.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/oneline-install-cloud-proxy.sh" && chmod +x /tmp/oneline-install-cloud-proxy.sh && sh /tmp/oneline-install-cloud-proxy.sh && rm -f /tmp/oneline-install-cloud-proxy.sh
+```
+
+# Manual Build - 100% Customized Install-Works on almost Every Image Till 24.10.08
 >[!WARNING]
 >Followed Step 03.1 now You Can Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt 24.01 Sysupgrade To Build Manually Simply Head Over To Markdown Listed Here. 
 
@@ -171,7 +180,7 @@ wget -O /tmp/oneline-install.sh --no-check-certificate --header="Authorization: 
 >IF You Plan to Use LAN Port 04 (Switch Port: Wan) As A Main Internet Connection From Home Router/ISP Head Over To Network > Devices And Configure Br-Lan And **De-attach Switchport:wan** From the Bridge. Then Create New Interface With with Switchport:wan And Assign WAN Firewall Rule. Make Sure to Add Gateway Metrics In The Interfaces Tab.
 
 **Set Gateway Metrics in Network > Interfaces Tab Lower Gateway Metrics Means High Priority.** <br>
->| HomeNet Metric = 5 | LTE Metric = 2 Means LTE Have More Priority Over HomeNET. LanPort 4 Works Only When The LTE Is Down.
+>| HomeNet Metric(New LAN Interface) = 5 | LTE(SIM) Metric = 2 Means LTE Have More Priority Over HomeNET. LanPort 4 Works Only When The LTE Is Down.
 
 
 ## Step 05 - Smart Traffic Control QoS/SQM
@@ -285,7 +294,7 @@ wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization
 >[!TIP]
 >By using an Xray Balancer Wrapper set to Fallback Mode, You Can Use Two Configs Main Config And The Backup Config to Make Your Router More Reliable to Server Side Drops.Its Only Possible From Xray Core Heres how We Setup Failover Nodes. 
 
-**Implementaion - Failover Nodes**
+**Implementaion - Failover Nodes -Only for XRAY Core**
 1) Add Your Main Node And Secondry Node As Usual (Node List > Add Node Via Link)
 2) Now Add New Node Using Add Button 
 3) Configure As 
