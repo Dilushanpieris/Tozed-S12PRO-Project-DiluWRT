@@ -131,14 +131,6 @@ Get Familier with The Process. Only The Starting Key Command is Provided to Past
 wget --no-check-certificate -O /tmp/key_install.sh "https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/refs/heads/main/Firmware%20Build-DiluWRT/key_install.sh" && chmod +x /tmp/key_install.sh && /tmp/key_install.sh && rm -f /tmp/key_install.sh
 ```
 
-# Auto Install without Exroot Config.
->[!CAUTION]
->This Is The Simple Install Method for Those Who only Need DiluWRT Build Without Custom Configs. If You Use This Build Will Be All Auto Installed Till Step 8. Please Make Sure you Have Followed Till Step 03 And Have Working internet To Router Test with **opkg update**
-
-## One Click Install Command
-```
-wget --no-check-certificate -O /tmp/AutoInstall.sh "https://raw.githubusercontent.com/Dilushanpieris/Tozed-S12PRO-Project-DiluWRT/refs/heads/main/Firmware%20Build-DiluWRT/AutoInstall.sh" && chmod +x /tmp/AutoInstall.sh && /tmp/AutoInstall.sh
-```
 # Manual Build - 100% Stable and Custom Install
 >[!WARNING]
 >Followed Step 03.1 now You Can Install Build in Full Manual Mode. This Mode Is Best for Custom Install with either Official DiluWRT Sysupgrade or Official OpenWrt24.01 Sysupgrade Proceed From Step 8 After as you Done Necessary Modifications. **(Optional Features Are At Step 8 And Step 9)**
@@ -164,7 +156,7 @@ opkg install luci-lib-ipkg
 
 **Luci-Argon-Full Theme Install Using wget-Require Auth Key to Work**
 ```
-wget -O /tmp/argon-remote-install.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-argon-theme.sh" && chmod +x /tmp/argon-remote-install.sh && sh /tmp/argon-remote-install.sh && rm -f /tmp/argon-remote-install.sh
+wget -O /tmp/argon-remote-install.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/install-argon-theme.sh" && chmod +x /tmp/argon-remote-install.sh && sh /tmp/argon-remote-install.sh && rm -f /tmp/argon-remote-install.sh
 ```
 
 >[!NOTE]
@@ -182,7 +174,7 @@ wget -O /tmp/argon-remote-install.sh --no-check-certificate --header="Authorizat
 ### Dashboard Install Oneline Command - Require Auth Key.
 
 ```
-wget -O /tmp/install-dashboard.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-dashboard.sh" && chmod +x /tmp/install-dashboard.sh && sh /tmp/install-dashboard.sh && rm -f /tmp/install-dashboard.sh
+wget -O /tmp/install-dashboard.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/install-dashboard.sh" && chmod +x /tmp/install-dashboard.sh && sh /tmp/install-dashboard.sh && rm -f /tmp/install-dashboard.sh
 ```
 
 **Preview Of Dashboard**
@@ -217,7 +209,7 @@ sms_tool -d /dev/ttyUSB3 at "AT+CSQ" 2>/dev/null
 >Modem Interface Name Is Required to Run This Script Correctly If You Have Changed it please **NOTE** it Down Using Luci > Interfaces. <br>In Default sqashfs_openwrt it must be **wwan** and in DiluWRT_sqashfs its **LTE**. Then Run Following Command It Will Create All The Files And Services to Modem Watchdog.
 
 ```
-wget -O /tmp/modem_service_01.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-watchdog.sh" && chmod +x /tmp/modem_service_01.sh && sh /tmp/modem_service_01.sh && rm -f /tmp/modem_service_01.sh
+wget -O /tmp/modem_service_01.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/install-watchdog.sh" && chmod +x /tmp/modem_service_01.sh && sh /tmp/modem_service_01.sh && rm -f /tmp/modem_service_01.sh
 ```
 
 >[!CAUTION]
@@ -240,11 +232,8 @@ logread -e 'modem-watchdog'
 
 **Single Command Install Require Auth Key**
 
->[!WARNING]
->To Run Below Command The Git hub Key Must Be Installed into Router First. it Will Create Modem Watchdog Service.
-
 ```
-wget -O /tmp/modem_service_02.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-led-controls.sh" && chmod +x /tmp/modem_service_02.sh && sh /tmp/modem_service_02.sh && rm -f /tmp/modem_service_02.sh
+wget -O /tmp/modem_service_02.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/install-led-controls.sh" && chmod +x /tmp/modem_service_02.sh && sh /tmp/modem_service_02.sh && rm -f /tmp/modem_service_02.sh
 ```
 
 >[!NOTE]
@@ -276,7 +265,7 @@ opkg install luci-app-3ginfo-lite
 
 **One Command update Require Key Form Git**
 ```
-wget -O /tmp/3ginfo-update.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/update3ginfo-lite.sh" && chmod +x /tmp/3ginfo-update.sh && sh /tmp/3ginfo-update.sh && rm -f /tmp/3ginfo-update.sh
+wget -O /tmp/3ginfo-update.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/update3ginfo-lite.sh" && chmod +x /tmp/3ginfo-update.sh && sh /tmp/3ginfo-update.sh && rm -f /tmp/3ginfo-update.sh
 ```
 
 >[!TIP]
@@ -300,11 +289,10 @@ opkg install luci-app-atcommands
 opkg install luci-app-modemband
 ```
 
-
 **One Command Update -Require Auth Key**
 
 ```
-wget -O /tmp/remote_update.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/main/Update_Scripts/update-modemband.sh" && chmod +x /tmp/remote_update.sh && sh /tmp/remote_update.sh && rm -f /tmp/remote_update.sh
+wget -O /tmp/remote_update.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/main/Tozed-S12-Pro-Lib/Update_Scripts/update-modemband.sh" && chmod +x /tmp/remote_update.sh && sh /tmp/remote_update.sh && rm -f /tmp/remote_update.sh
 ```
 
 ## Step 07 - Wireless Interface Configuration (WPS/WPA2/PSK)
@@ -336,7 +324,8 @@ opkg install wpad hostapd-utils
 
 **One Command Install WPS_LED Require Auth Key**
 ```
-wget -O /tmp/install-wps-led-service.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/wps-led-install.sh" && chmod +x /tmp/install-wps-led-service.sh && sh /tmp/install-wps-led-service.sh && rm -f /tmp/install-wps-led-service.sh
+wget -O /tmp/install-wps-led-service.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/wps-led-install.sh" && chmod +x /tmp/install-wps-led-service.sh && sh /tmp/install-wps-led-service.sh && rm -f /tmp/install-wps-led-service.sh
+
 reboot
 ```
 
@@ -492,7 +481,7 @@ To Setup WAN Bandwidth Limit First Create Interfaces As Per Your Requirement Usi
 >Make Sure You Have Plugged In USB And Have Proper Internet Connection. If There Is Issue With Package Checks Abort Script And Then Try Again 
 
 ```
-wget -O /tmp/exroot_config.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/exroot_config.sh" && chmod +x /tmp/exroot_config.sh && sh /tmp/exroot_config.sh && rm -f /tmp/exroot_config.sh
+wget -O /tmp/exroot-config.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/exroot-config.sh" && chmod +x /tmp/exroot-config.sh && sh /tmp/exroot-config.sh && rm -f /tmp/exroot-config.sh
 ```
 
 >[!NOTE]
@@ -512,7 +501,7 @@ However the Max Speeds Can Be Achived **limited by CPU > Around 20-30mbps on Fib
 
 **One Command Install Require Auth Key**
 ```
-wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/install-passwall2.sh" && chmod +x /tmp/install-passwall2.sh && sh /tmp/install-passwall2.sh && rm -f /tmp/install-passwall2.sh
+wget -O /tmp/install-passwall2.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/install-passwall2.sh" && chmod +x /tmp/install-passwall2.sh && sh /tmp/install-passwall2.sh && rm -f /tmp/install-passwall2.sh
 ```
 
 **Passwall Interface Will Look Like This**
@@ -696,10 +685,10 @@ opkg install luci-app-ttyd
 >[!TIP]
 >This Scripts Are Used to Turn On /OFF Passwall At The Free Data/ Night Time Period. When Installed Passwall Will Automatically Turn off At 11.59 PM And Start Back on At 8.00 AM
 
-**Install Automation Scripts - Passwall Switch**
+**Install Automation Scripts - Passwall AutoSwitch**
 
 ```
-wget -O /tmp/install-autoswitch.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Update_Scripts/passwall_autoswitch_install.sh" && chmod +x /tmp/install-autoswitch.sh && sh /tmp/install-autoswitch.sh && rm -f /tmp/install-autoswitch.sh
+wget -O /tmp/passwall-autoswitch-install.sh --no-check-certificate --header="Authorization: token $(cat /etc/auth/.github_token)" "https://raw.githubusercontent.com/Dilushanpieris/Project-DiluWRT/refs/heads/main/Tozed-S12-Pro-Lib/Update_Scripts/passwall-autoswitch-install.sh" && chmod +x /tmp/passwall-autoswitch-install.sh && sh /tmp/passwall-autoswitch-install.sh && rm -f /tmp/passwall-autoswitch-install.sh
 ```
 
 **To Automate The Process Paste these Commands in Your Scheduled Tasks Tab After Installing Script**
